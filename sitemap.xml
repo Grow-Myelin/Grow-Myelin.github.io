@@ -26,12 +26,12 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://Grow-Myelin.github.io/projects/</loc>
+         <loc>https://Grow-Myelin.github.io/prob_prog_tools/</loc>
          <lastmod>2024-02-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://Grow-Myelin.github.io/random_process_generator/</loc>
+         <loc>https://Grow-Myelin.github.io/projects/</loc>
          <lastmod>2024-02-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -42,11 +42,6 @@
     </url>
     <url>
          <loc>https://Grow-Myelin.github.io/ti4_combat_simulator/</loc>
-         <lastmod>2024-02-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://Grow-Myelin.github.io/ti4_functions/</loc>
          <lastmod>2024-02-14</lastmod>
          <changefreq>daily</changefreq>
     </url>

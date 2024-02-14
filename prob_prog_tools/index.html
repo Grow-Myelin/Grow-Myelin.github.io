@@ -6,9 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <meta name="author" content="Jacob Rider">
-        <link rel="canonical" href="https://Grow-Myelin.github.io/ti4_functions/">
+        <link rel="canonical" href="https://Grow-Myelin.github.io/prob_prog_tools/">
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>ti4_functions - Jacob Rider's Personal Portfolio</title>
+        <title>Probabilistic Programming Tools - Jacob Rider's Personal Portfolio</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
@@ -42,7 +42,7 @@
                             <li class="navitem">
                                 <a href="../skills/" class="nav-link">Skills</a>
                             </li>
-                            <li class="dropdown">
+                            <li class="dropdown active">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
@@ -55,7 +55,7 @@
 </li>
                                     
 <li>
-    <a href="../random_process_generator/" class="dropdown-item">Probabilistic Programming Tools</a>
+    <a href="./" class="dropdown-item active">Probabilistic Programming Tools</a>
 </li>
                                     
 <li>
@@ -74,6 +74,16 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../baseball_pitch_predictor/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
                     </ul>
                 </div>
             </div>
@@ -92,13 +102,29 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#ti4_functions" class="nav-link">ti4_functions</a>
+            <li class="nav-item" data-level="1"><a href="#probabilistic-programming-tools" class="nav-link">Probabilistic Programming Tools</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#technologies-used" class="nav-link">Technologies Used</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#project-overview" class="nav-link">Project Overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#key-features" class="nav-link">Key Features</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-level="2"><a href="#imports" class="nav-link">Imports</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#types" class="nav-link">Types</a>
+            <li class="nav-item" data-level="2"><a href="#classes" class="nav-link">Classes</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#methods" class="nav-link">Methods</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -117,88 +143,157 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="ti4_functions">ti4_functions</h1>
-<p>This document describes a set of functions for simulating combat scenarios using JAX.</p>
+<h1 id="probabilistic-programming-tools">Probabilistic Programming Tools</h1>
+<p><strong><a href="https://github.com/Grow-Myelin/ProbProg/tree/main/ProbProgTools">View Project on GitHub</a></strong></p>
+<h2 id="technologies-used">Technologies Used</h2>
+<ul>
+<li>Python</li>
+<li>NumPy</li>
+<li>Jax</li>
+<li>NumPyro</li>
+</ul>
+<h2 id="project-overview">Project Overview</h2>
+<p>Designed tools that simulate a random levy process and then uses NumPyro to infer the parameters used to simulate those processes.</p>
+<h2 id="key-features">Key Features</h2>
+<ul>
+<li>Simulation of processes that resemble stock price movements using random levy processes.</li>
+<li>Parameter inference with NumPyro to understand underlying market dynamics.</li>
+</ul>
 <h2 id="imports">Imports</h2>
-<pre><code class="language-python">import jax
-import jax.numpy as jnp
-from jax import random
+<pre><code class="language-python">from scipy.stats import levy_stable
+from jax.scipy.linalg import cholesky
+from typing import Dict, List, Tuple
 import os
-from typing import Dict, Tuple, Any
+from typing import Any, Dict
+import jax
+import jax.numpy as jnp
+import matplotlib.pyplot as plt
+import numpyro
+import numpyro.distributions as dist
+import seaborn as sns
+from numpyro.infer import MCMC, NUTS
 </code></pre>
-<h2 id="types">Types</h2>
-<pre><code class="language-python">KeyType = Tuple[int, float]
-SideType = Dict[KeyType, int]
-RNGKey = Any
+<h2 id="classes">Classes</h2>
+<h3 id="stockmarketsimulator">StockMarketSimulator</h3>
+<pre><code class="language-python">class StockMarketSimulator:
+    &quot;&quot;&quot;
+    A simulator for stock market prices using Levy processes with JAX for computation and
+    Pareto-distributed initial prices using NumPy.
+
+    Attributes:
+        n_industries (int): Number of industries.
+        n_stocks_per_industry (int): Number of stocks per industry.
+        base_stock_price (float): Base stock price for scaling initial prices.
+        industries (List[str]): List of industry names.
+        stocks (List[str]): List of stock symbols.
+        stock_prices (pd.DataFrame): DataFrame to store simulated stock prices.
+        seed (int): Int derived through os for true random state
+        key (jax.random.PRNGKey): JAX PRNG key for random number generation.
+        industry_map (Dict[str, str]): Mapping of stocks to their respective industries.
+        alpha_params (Dict[str, float]): Alpha parameter for each industry.
+        beta_params (Dict[str, float]): Beta parameter for each industry.
+        pareto_shapes (Dict[str, float]): Pareto shape parameter for each industry.
+    &quot;&quot;&quot;
+</code></pre>
+<h2 id="methods">Methods</h2>
+<h3 id="init"><strong>init</strong>()</h3>
+<pre><code class="language-python">def __init__(self, n_industries: int = 8, n_stocks_per_industry: int = 10, base_stock_price: float = 100) -&gt; None:
+    &quot;&quot;&quot;
+    Initialize the stock market simulator with specified parameters.
+
+    Args:
+        n_industries (int): The number of industries to simulate.
+        n_stocks_per_industry (int): The number of stocks per industry.
+        base_stock_price (float): The base stock price for scaling initial prices.
+    &quot;&quot;&quot;
+</code></pre>
+<h3 id="_initialize_prices">_initialize_prices()</h3>
+<pre><code class="language-python">def _initialize_prices(self) -&gt; None:
+    &quot;&quot;&quot;Initialize the stock prices using Pareto distribution for each industry.&quot;&quot;&quot;
+</code></pre>
+<h3 id="_simulate_stock_prices">_simulate_stock_prices()</h3>
+<pre><code class="language-python">def simulate_stock_prices(self, n_days: int = 252) -&gt; pd.DataFrame:
+    &quot;&quot;&quot;
+    Simulate stock prices over a given number of days.
+
+    Args:
+        n_days (int): The number of days to simulate stock prices.
+
+    Returns:
+        pd.DataFrame: A DataFrame containing the simulated stock prices.
+    &quot;&quot;&quot;
+</code></pre>
+<h3 id="_apply_correlation">_apply_correlation</h3>
+<pre><code class="language-python">def _apply_correlation(self, increments: np.ndarray) -&gt; np.ndarray:
+    &quot;&quot;&quot;
+    Apply a correlation matrix to the increments using Cholesky decomposition.
+
+    Args:
+        increments (np.ndarray): An array of increments to apply correlation to.
+
+    Returns:
+        np.ndarray: Correlated increments after applying the correlation matrix.
+    &quot;&quot;&quot;
 </code></pre>
 <h2 id="functions">Functions</h2>
-<h3 id="apply_hits">apply_hits</h3>
-<pre><code class="language-python">def apply_hits(side: SideType, hits_scored: int, rng_key: RNGKey) -&gt; SideType:
+<h3 id="plot_posteriors">plot_posteriors()</h3>
+<pre><code class="language-python">def plot_posteriors(posterior_samples: Dict[str, jnp.ndarray], industry: str) -&gt; None:
     &quot;&quot;&quot;
-    Apply hits to a side with JAX, prioritizing dice with lower hit probabilities 
-    and lower health. Incorporates randomness in selecting dice within the same 
-    priority level to take hits. Accepts an RNG key for reproducible randomness.
+    Plots the posterior distributions for a given industry.
 
-    Parameters:
-        side (SideType): Dictionary representing the side's units and their stats.
-        hits_scored (int): Number of hits to apply to the side.
-        rng_key (RNGKey): JAX random key for generating random numbers.
-
-    Returns:
-        SideType: Updated side after applying hits.
+    Args:
+        posterior_samples: Samples from the posterior distribution as a dictionary where keys are parameter names.
+        industry (str): The name of the industry for which the posterior distributions are plotted.
     &quot;&quot;&quot;
 </code></pre>
-<h3 id="simulate_combat_round_jax">simulate_combat_round_jax</h3>
-<pre><code class="language-python">def simulate_combat_round_jax(side_a: SideType, side_b: SideType, rng_key: RNGKey) -&gt; Tuple[SideType, SideType]:
+<h3 id="run_bayesian_inference">run_bayesian_inference()</h3>
+<pre><code class="language-python">def run_bayesian_inference(simulator: DI.StockMarketSimulator, n_samples: int = 500, n_warmup: int = 100) -&gt; None:
     &quot;&quot;&quot;
-    Simulates a single round of combat between two sides using JAX.
+    Runs Bayesian inference for each industry and plots the posterior distributions.
 
-    Parameters:
-        side_a (SideType): First combatant side.
-        side_b (SideType): Second combatant side.
-        rng_key (RNGKey): JAX random key for generating random numbers.
-
-    Returns:
-        Tuple[SideType, SideType]: Updated states of side_a and side_b after combat.
+    Args:
+        simulator: An instance of StockMarketSimulator containing stock prices and industry mappings.
+        n_samples (int): Number of samples to draw from the posterior distribution.
+        n_warmup (int): Number of warmup steps for the sampler.
     &quot;&quot;&quot;
 </code></pre>
-<h3 id="run_combat_until_elimination">run_combat_until_elimination</h3>
-<pre><code class="language-python">def simulate_combat_round_jax(side_a: SideType, side_b: SideType, rng_key: RNGKey) -&gt; Tuple[SideType, SideType]:
+<h3 id="plot_stock_prices">plot_stock_prices()</h3>
+<pre><code class="language-python">def plot_stock_prices(simulator: DI.StockMarketSimulator) -&gt; None:
     &quot;&quot;&quot;
-    Simulates a single round of combat between two sides using JAX.
+    Plot the simulated stock prices for all stocks in the simulation.
 
-    Parameters:
-        side_a (SideType): First combatant side.
-        side_b (SideType): Second combatant side.
-        rng_key (RNGKey): JAX random key for generating random numbers.
+    Args:
+        simulator (DI.StockMarketSimulator): An instance of the StockMarketSimulator class.
 
-    Returns:
-        Tuple[SideType, SideType]: Updated states of side_a and side_b after combat.
+    This function generates a line plot for each stock across the simulated days and saves the plot
+    to a file named 'simulated_stock_prices.png' in the 'plots' directory.
     &quot;&quot;&quot;
 </code></pre>
-<h3 id="monte_carlo_combat_simulation">monte_carlo_combat_simulation</h3>
-<pre><code class="language-python">def monte_carlo_combat_simulation(initial_side_a: SideType, initial_side_b: SideType, num_simulations: int = 1000) -&gt; Dict[str, float]:
+<h3 id="plot_stock_prices_by_industry">plot_stock_prices_by_industry()</h3>
+<pre><code class="language-python">def plot_stock_prices_by_industry(simulator: DI.StockMarketSimulator) -&gt; None:
     &quot;&quot;&quot;
-    Performs a Monte Carlo simulation of combat between two sides over a specified
-    number of simulations to estimate outcome probabilities.
+    Plot the simulated stock prices for each industry separately.
 
-    Parameters:
-        initial_side_a (SideType): Initial state of side A.
-        initial_side_b (SideType): Initial state of side B.
-        num_simulations (int): Number of simulations to run.
+    Args:
+        simulator (DI.StockMarketSimulator): An instance of the StockMarketSimulator class.
 
-    Returns:
-        Dict[str, float]: Probabilities of different outcomes.
+    This function generates a line plot for each stock within an industry across the simulated days and saves
+    each industry's plot to a separate file in the 'plots' directory, named 'simulated_stock_price_by_[industry].png'.
     &quot;&quot;&quot;
 </code></pre>
 <h2 id="example-usage">Example Usage</h2>
-<p>The following is an example of 2 dreadnaughts, each with 2 health hitting 60% of the time fighting vs 6 fighters, each with 1 health hitting 20% of the time.</p>
-<pre><code class="language-python">initial_side_a = {(2, 0.6): 3}
-initial_side_b = {(1, 0.2): 6}
-num_simulations = 10000
-probabilities = monte_carlo_combat_simulation(initial_side_a, initial_side_b, num_simulations)
-print(probabilities)
+<pre><code class="language-python">def main() -&gt; None:
+    &quot;&quot;&quot;
+    Main function to initialize the simulator, run the stock price simulation, and plot the results.
+    &quot;&quot;&quot;
+    simulator = DI.StockMarketSimulator()
+    run_bayesian_inference(simulator)
+    simulator.simulate_stock_prices()
+    plot_stock_prices(simulator)
+    plot_stock_prices_by_industry(simulator)
 
+if __name__ == &quot;__main__&quot;:
+    main()
 </code></pre></div>
             </div>
         </div>
