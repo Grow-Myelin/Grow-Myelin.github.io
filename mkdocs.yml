@@ -1,0 +1,24 @@
+site_name: Jacob Rider's Personal Portfolio
+site_url: https://Grow-Myelin.github.io
+site_description: A brief description about you.
+site_author: Jacob Rider
+
+theme:
+  name: 'minty'
+  features:
+    - instant.loading
+  font:
+    text: Roboto
+    code: Roboto Mono
+nav:
+  - Home: index.md
+  - Experience: experience.md
+  - Education: education.md
+  - Skills: skills.md
+  - Projects:
+      - 'TI4 Combat Simulator':
+          - 'TI4 Functions': 'ti4_functions.md' # This line needs to be indented to align as a sub-item
+      - 'Baseball Pitch Predictor': 'baseball_pitch_predictor.md'
+      - 'Probabilistic Programming Tools': 'random_process_generator.md'
+      - 'Data Tools for Economic Research': 'data_tools_for_economic_research.md'
+  - Contact: contact.md
