@@ -4,23 +4,23 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="A brief description about you.">
+        
         <meta name="author" content="Jacob Rider">
-        <link rel="canonical" href="https://Grow-Myelin.github.io/">
-        <link rel="shortcut icon" href="img/favicon.ico">
-        <title>Jacob Rider's Personal Portfolio</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/font-awesome.min.css" rel="stylesheet">
-        <link href="css/base.css" rel="stylesheet">
+        <link rel="canonical" href="https://Grow-Myelin.github.io/projects/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Projects - Jacob Rider's Personal Portfolio</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atelier-cave-light.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
         <script>hljs.highlightAll();</script> 
     </head>
 
-    <body class="homepage">
+    <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href=".">Jacob Rider's Personal Portfolio</a>
+                <a class="navbar-brand" href="..">Jacob Rider's Personal Portfolio</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
                     <span class="navbar-toggler-icon"></span>
@@ -30,17 +30,17 @@
                 <div id="navbar-collapse" class="navbar-collapse collapse">
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
-                            <li class="navitem active">
-                                <a href="." class="nav-link">Home</a>
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Home</a>
                             </li>
                             <li class="navitem">
-                                <a href="experience/" class="nav-link">Experience</a>
+                                <a href="../experience/" class="nav-link">Experience</a>
                             </li>
                             <li class="navitem">
-                                <a href="education/" class="nav-link">Education</a>
+                                <a href="../education/" class="nav-link">Education</a>
                             </li>
                             <li class="navitem">
-                                <a href="skills/" class="nav-link">Skills</a>
+                                <a href="../skills/" class="nav-link">Skills</a>
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
@@ -51,26 +51,26 @@
     <ul class="dropdown-menu">
             
 <li>
-    <a href="ti4_functions/" class="dropdown-item">TI4 Functions</a>
+    <a href="../ti4_functions/" class="dropdown-item">TI4 Functions</a>
 </li>
     </ul>
   </li>
                                     
 <li>
-    <a href="baseball_pitch_predictor/" class="dropdown-item">Baseball Pitch Predictor</a>
+    <a href="../baseball_pitch_predictor/" class="dropdown-item">Baseball Pitch Predictor</a>
 </li>
                                     
 <li>
-    <a href="random_process_generator/" class="dropdown-item">Probabilistic Programming Tools</a>
+    <a href="../random_process_generator/" class="dropdown-item">Probabilistic Programming Tools</a>
 </li>
                                     
 <li>
-    <a href="data_tools_for_economic_research.md" class="dropdown-item">Data Tools for Economic Research</a>
+    <a href="../data_tools_for_economic_research.md" class="dropdown-item">Data Tools for Economic Research</a>
 </li>
                                 </ul>
                             </li>
                             <li class="navitem">
-                                <a href="contact.md" class="nav-link">Contact</a>
+                                <a href="../contact.md" class="nav-link">Contact</a>
                             </li>
                         </ul>
 
@@ -80,16 +80,6 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
-                            <li class="nav-item">
-                                <a rel="prev" class="nav-link disabled">
-                                    <i class="fa fa-arrow-left"></i> Previous
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a rel="next" href="experience/" class="nav-link">
-                                    Next <i class="fa fa-arrow-right"></i>
-                                </a>
-                            </li>
                     </ul>
                 </div>
             </div>
@@ -108,9 +98,21 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#jacob-rider" class="nav-link">Jacob Rider</a>
+            <li class="nav-item" data-level="1"><a href="#projects" class="nav-link">Projects</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#professional-summary" class="nav-link">Professional Summary</a>
+            <li class="nav-item" data-level="2"><a href="#ti4-combat-simulator" class="nav-link">TI4 Combat Simulator</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#baseball-pitch-predictor" class="nav-link">Baseball Pitch Predictor</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#probabilistic-programming-tools" class="nav-link">Probabilistic Programming Tools</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#data-tools-for-economic-research" class="nav-link">Data Tools for Economic Research</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -121,21 +123,27 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="jacob-rider">Jacob Rider</h1>
-<h2 id="professional-summary">Professional Summary</h2>
-<p>I am a math and data enthusiast looking for a position where I can build probabilistic models of complex data in order to inform decision making (with a little bit of help from generative AI).
-In my most recent job, I learned the extract, transform, and load (ETL) process using a variety of methods. I also have experience creating dashboards and KPIs using Tableau and Excel. I believe these experiences uniquely position me to own the data modeling process from end-to-end. </p>
-<hr />
+<h1 id="projects">Projects</h1>
+<h2 id="ti4-combat-simulator"><a href="../ti4_combat_simulator/">TI4 Combat Simulator</a></h2>
+<p><strong>Technologies Used</strong>: Python, Jax, NumPyro</p>
 <ul>
-<li><strong>Skills:</strong> Python, SQL, AWS, Tableau, Excel</li>
-<li><strong>Passions:</strong> Generative AI, probabilistic programming, and data modeling</li>
-<li><strong>Soft Skills:</strong> Concise and courteous communication</li>
-<li><strong>Hobbies:</strong> Board games, travel, and food</li>
+<li>Developed a combat simulator for the board game "Twilight Imperium 4th Edition" (TI4), utilizing Monte Carlo and probability theory to model the distribution of outcomes for in-game combat scenarios.</li>
 </ul>
-<hr />
-<p><strong>jacob.rider34@gmail.com</strong> | <a href="https://www.linkedin.com/in/jacobrider/"><strong>LinkedIn</strong></a> | <a href="https://github.com/Grow-Myelin"><strong>GitHub</strong></a> | <a href="https://Grow-Myelin.github.io"><strong>Website</strong></a></p>
-<hr />
-<p><a href="experience/">Experience</a> | <a href="education/">Education</a> | <a href="skills/">Skills</a> | <a href="projects/">Projects</a> | <a href="contact.md">Contact</a></p></div>
+<h2 id="baseball-pitch-predictor"><a href="../baseball_pitch_predictor/">Baseball Pitch Predictor</a></h2>
+<p><strong>Technologies Used</strong>: Python, Jax, Flax</p>
+<ul>
+<li>Created a predictive model to analyze and forecast baseball pitch types based on historical pitch data.</li>
+</ul>
+<h2 id="probabilistic-programming-tools"><a href="../random_process_generator/">Probabilistic Programming Tools</a></h2>
+<p><strong>Technologies Used</strong>: Python, NumPy, Jax, NumPyro</p>
+<ul>
+<li>Designed a stock market simulation tool that simulates a random levy process and then uses NumPyro infers the parameters used to simulate those processes. </li>
+</ul>
+<h2 id="data-tools-for-economic-research"><a href="../data_tools/">Data Tools for Economic Research</a></h2>
+<p><strong>Technologies Used</strong>: Python, SQL</p>
+<ul>
+<li>Developed a suite of data analysis tools tailored for economic research and the cleaning and ingestion of economic and financial API data into a SQLite database. </li>
+</ul></div>
             </div>
         </div>
 
@@ -143,14 +151,14 @@ In my most recent job, I learned the extract, transform, and load (ETL) process 
             <hr>
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
-        <script src="js/jquery-3.6.0.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+        <script src="../js/jquery-3.6.0.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
         <script>
-            var base_url = ".",
+            var base_url = "..",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="js/base.js"></script>
-        <script src="search/main.js"></script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -215,8 +223,3 @@ In my most recent job, I learned the extract, transform, and load (ETL) process 
 
     </body>
 </html>
-
-<!--
-MkDocs version : 1.5.3
-Build Date UTC : 2024-02-14 20:54:27.345108+00:00
--->
