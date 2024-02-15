@@ -120,6 +120,10 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-level="2"><a href="#classes" class="nav-link">Classes</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-level="2"><a href="#functions" class="nav-link">Functions</a>
               <ul class="nav flex-column">
               </ul>
@@ -152,9 +156,35 @@
 <h2 id="imports">Imports</h2>
 <pre><code class="language-python">import pandas as pd
 import numpy as np
-from jax import numpy as jnp
+import jax
+import jax.numpy as jnp
+from flax import linen as nn
+from flax.training.train_state import TrainState
+import optax
+from jax.random import PRNGKey
+from parsePitchData import clean_data
+from sklearn.metrics import confusion_matrix
+import seaborn as sns
+import matplotlib.pyplot as plt
 from typing import Tuple, Dict, List
 import time
+</code></pre>
+<h2 id="classes">Classes</h2>
+<h3 id="pitchpredictormodel">PitchPredictorModel</h3>
+<pre><code class="language-python">class PitchPredictorModel(nn.Module):
+    num_outputs: int  # Number of unique pitch types
+
+    @nn.compact
+    def __call__(self, x: jnp.ndarray) -&gt; jnp.ndarray:
+        &quot;&quot;&quot;
+        Forward pass for the pitch predictor model.
+
+        Parameters:
+        - x (jnp.ndarray): Input tensor with shape (batch_size, 4, n).
+
+        Returns:
+        - jnp.ndarray: Logits tensor with shape (batch_size, num_outputs).
+        &quot;&quot;&quot;
 </code></pre>
 <h2 id="functions">Functions</h2>
 <h3 id="normalize_counts">normalize_counts</h3>
@@ -171,12 +201,188 @@ import time
 </code></pre>
 <h3 id="efficient_pitch_distribution">efficient_pitch_distribution</h3>
 <pre><code class="language-python">def efficient_pitch_distribution(df: pd.DataFrame, pitch_types: List[str], filter_conditions: Dict[str, str]) -&gt; np.ndarray:
+    &quot;&quot;&quot;Calculate and normalize the distribution of pitch types, excluding the current event.
+
+    Parameters:
+    - df (pd.DataFrame): The dataframe containing pitch data.
+    - pitch_types (List[str]): List of all possible pitch types.
+    - filter_conditions (Dict[str, str]): Conditions to filter the dataframe.
+
+    Returns:
+    - np.ndarray: Normalized distribution of pitch counts.
     &quot;&quot;&quot;
-    Calculate and normalize the distribution of pitch types, excluding the current event.
+</code></pre>
+<h3 id="return_pitch_distributions">return_pitch_distributions</h3>
+<pre><code class="language-python">def return_pitch_distributions(df: pd.DataFrame, df_row: pd.Series, pitch_types: List[str]) -&gt; jnp.ndarray:
+    &quot;&quot;&quot;Calculate pitch distributions for different contexts based on a row from the dataframe.
+
+    Parameters:
+    - df (pd.DataFrame): The dataframe containing pitch data.
+    - df_row (pd.Series): A row from the dataframe specifying the current event.
+    - pitch_types (List[str]): List of all possible pitch types.
+
+    Returns:
+    - jnp.ndarray: Stack of normalized pitch distributions for different contexts.
+    &quot;&quot;&quot;
+</code></pre>
+<h3 id="return_current_pitch">return_current_pitch</h3>
+<pre><code class="language-python">def return_current_pitch(df_row: pd.Series, pitch_types: List[str]) -&gt; List[int]:
+    &quot;&quot;&quot;Generate a one-hot encoded vector for the current pitch type.
+
+    Parameters:
+    - df_row (pd.Series): A row from the dataframe specifying the current event.
+    - pitch_types (List[str]): List of all possible pitch types.
+
+    Returns:
+    - List[int]: One-hot encoded vector representing the current pitch type.
+    &quot;&quot;&quot;
+</code></pre>
+<h3 id="clean_data">clean_data()</h3>
+<pre><code class="language-python">def clean_data() -&gt; Tuple[jnp.ndarray, jnp.ndarray]:
+    &quot;&quot;&quot;Load, preprocess data, and compute pitch distributions.
+
+    Returns:
+    - Tuple[jnp.ndarray, jnp.ndarray]: Tuple of inputs and outputs for modeling.
+    &quot;&quot;&quot;
+</code></pre>
+<h3 id="cross_entropy_loss">cross_entropy_loss()</h3>
+<pre><code class="language-python">def cross_entropy_loss(logits: jnp.ndarray, labels: jnp.ndarray) -&gt; jnp.ndarray:
+    &quot;&quot;&quot;
+    Computes the cross-entropy loss between logits and labels.
+
+    Parameters:
+    - logits (jnp.ndarray): Predictions from model.
+    - labels (jnp.ndarray): True labels, one-hot encoded.
+
+    Returns:
+    - jnp.ndarray: Cross-entropy loss.
+    &quot;&quot;&quot;
+</code></pre>
+<h3 id="compute_accuracy">compute_accuracy()</h3>
+<pre><code class="language-python">def compute_accuracy(logits: jnp.ndarray, labels: jnp.ndarray) -&gt; float:
+    &quot;&quot;&quot;
+    Computes the accuracy of the predictions.
+
+    Parameters:
+    - logits (jnp.ndarray): Predictions from model.
+    - labels (jnp.ndarray): True labels, one-hot encoded.
+
+    Returns:
+    - float: Accuracy of predictions.
+    &quot;&quot;&quot;
+</code></pre>
+<h3 id="create_train_state">create_train_state()</h3>
+<pre><code class="language-python">def create_train_state(rng: PRNGKey, learning_rate: float, num_outputs: int) -&gt; TrainState:
+    &quot;&quot;&quot;
+    Initializes the model's train state.
+
+    Parameters:
+    - rng (PRNGKey): Random number generator key.
+    - learning_rate (float): Learning rate for the optimizer.
+    - num_outputs (int): Number of unique pitch types.
+
+    Returns:
+    - TrainState: The initialized training state.
+    &quot;&quot;&quot;
+</code></pre>
+<h3 id="train_step">train_step()</h3>
+<pre><code class="language-python">def train_step(state: TrainState, batch: dict) -&gt; tuple:
+    &quot;&quot;&quot;
+    Performs a single training step.
+
+    Parameters:
+    - state (TrainState): Current training state.
+    - batch (dict): Batch of data containing 'inputs' and 'targets'.
+
+    Returns:
+    - tuple: Updated state, loss, and accuracy for the batch.
+    &quot;&quot;&quot;
+</code></pre>
+<h3 id="train_model">train_model()</h3>
+<pre><code class="language-python">def train_model(num_epochs: int, learning_rate: float, num_outputs: int, train_data: list) -&gt; None:
+    &quot;&quot;&quot;
+    Trains the model.
+
+    Parameters:
+    - num_epochs (int): Number of epochs to train for.
+    - learning_rate (float): Learning rate for the optimizer.
+    - num_outputs (int): Number of unique pitch types.
+    - train_data (list): Training data.
     &quot;&quot;&quot;
 </code></pre>
 <h2 id="example-usage">Example Usage</h2>
-<pre><code class="language-python"># In progress
+<pre><code class="language-python">def main():
+    inputs, outputs = clean_data()  # Assuming this returns correctly shaped data
+    n = outputs.shape[1]
+    learning_rate = 0.001
+    num_epochs = 10
+    # Placeholder class weights calculation
+    # You should calculate these based on your dataset's specific class distribution
+    class_weights = jnp.array([1.0,5.0,5.0,5.0])  # Example weights for 3 classes
+
+
+    # Splitting data into training and testing sets
+    num_training = int(0.8 * len(inputs))
+    train_inputs, test_inputs = inputs[:num_training], inputs[num_training:]
+    train_outputs, test_outputs = outputs[:num_training], outputs[num_training:]
+
+    # Initialize the model and training state
+    rng = PRNGKey(0)
+    state = create_train_state(rng, learning_rate, n)
+
+    # Adjusted training loop
+    for epoch in range(num_epochs):
+        epoch_loss = 0
+        epoch_accuracy = 0
+        num_batches = len(train_inputs)  # Assuming batch size of 1 for simplicity
+        for i in range(num_batches):
+            inputs = train_inputs[i].reshape(1, 4, n)
+            outputs = train_outputs[i].reshape(1, n)
+            state, loss, accuracy = train_step(state, {'inputs': inputs, 'targets': outputs})
+            epoch_loss += loss
+            epoch_accuracy += accuracy
+        epoch_loss /= num_batches
+        epoch_accuracy /= num_batches
+        print(f&quot;Epoch {epoch}, Loss: {epoch_loss}, Accuracy: {epoch_accuracy}&quot;)
+
+
+    # The rest of your code remains unchanged up to the prediction part...
+
+    # No need to reinitialize the model if we are using the trained state
+    # model = PitchPredictorModel(num_outputs=n)  # Remove or comment out this line
+
+    # Initialize a list to store prediction logits
+    test_pred_logits = []
+
+    # Predict in a loop
+    for i in range(len(test_inputs)):
+        # Reshape the input correctly as the model expects
+        test_input_reshaped = test_inputs[i].reshape(1, 4, n)
+        # Correctly use the trained parameters for prediction
+        logits = state.apply_fn({'params': state.params}, test_input_reshaped)
+        test_pred_logits.append(logits)
+
+    # Assuming test_pred_logits is now a list of arrays, stack them
+    test_pred_logits = jnp.vstack(test_pred_logits)  # Stack logits for further processing
+
+    # Convert logits to predicted class indices
+    test_pred_labels = jnp.argmax(test_pred_logits, axis=-1)
+
+    # Ensure true_labels is correctly prepared from test_outputs
+    true_labels = jnp.argmax(test_outputs, axis=-1)
+
+    # Compute the confusion matrix
+    cm = confusion_matrix(true_labels, test_pred_labels)
+
+    # Plot the confusion matrix
+    plt.figure(figsize=(10, 7))
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
+    plt.xlabel('Predicted Labels')
+    plt.ylabel('True Labels')
+    plt.title('Confusion Matrix')
+    plt.savefig('plots/prediction_results1.png')
+if __name__ == &quot;__main__&quot;:
+    main()
 </code></pre>
 <hr />
 <p><a href="../experience/">Experience</a> | <a href="../education/">Education</a> | <a href="../skills/">Skills</a> | <a href="../projects/"><strong>Projects</strong></a> | <a href="../contact/">Contact</a></p>
