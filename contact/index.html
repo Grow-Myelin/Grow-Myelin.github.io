@@ -6,9 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <meta name="author" content="Jacob Rider">
-        <link rel="canonical" href="https://Grow-Myelin.github.io/ti4_combat_simulator/">
+        <link rel="canonical" href="https://Grow-Myelin.github.io/contact/">
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>TI4 Combat Simulator - Jacob Rider's Personal Portfolio</title>
+        <title>Contact - Jacob Rider's Personal Portfolio</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
@@ -42,12 +42,12 @@
                             <li class="navitem">
                                 <a href="../skills/" class="nav-link">Skills</a>
                             </li>
-                            <li class="dropdown active">
+                            <li class="dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="./" class="dropdown-item active">TI4 Combat Simulator</a>
+    <a href="../ti4_combat_simulator/" class="dropdown-item">TI4 Combat Simulator</a>
 </li>
                                     
 <li>
@@ -63,8 +63,8 @@
 </li>
                                 </ul>
                             </li>
-                            <li class="navitem">
-                                <a href="../contact/" class="nav-link">Contact</a>
+                            <li class="navitem active">
+                                <a href="./" class="nav-link">Contact</a>
                             </li>
                         </ul>
 
@@ -75,12 +75,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../skills/" class="nav-link">
+                                <a rel="prev" href="../data_tools/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../baseball_pitch_predictor/" class="nav-link">
+                                <a rel="next" class="nav-link disabled">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -102,44 +102,8 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#ti4-combat-simulator" class="nav-link">TI4 Combat Simulator</a>
+            <li class="nav-item" data-level="1"><a href="#contact-details" class="nav-link">Contact Details</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#technologies-used" class="nav-link">Technologies Used</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#project-background" class="nav-link">Project Background</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#project-overview" class="nav-link">Project Overview</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#key-features" class="nav-link">Key Features</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#ti4_functions" class="nav-link">ti4_functions</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#imports" class="nav-link">Imports</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#types" class="nav-link">Types</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#functions" class="nav-link">Functions</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#example-usage" class="nav-link">Example Usage</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
               </ul>
             </li>
         </ul>
@@ -147,105 +111,23 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="ti4-combat-simulator">TI4 Combat Simulator</h1>
-<p><strong><a href="https://github.com/Grow-Myelin/ProbProg/tree/main/TI4">View Project on GitHub</a></strong></p>
-<h2 id="technologies-used">Technologies Used</h2>
+<h1 id="contact-details">Contact Details</h1>
 <ul>
-<li>Python</li>
-<li>Jax</li>
+<li>
+<p><strong>jacob.rider34@gmail.com</strong></p>
+</li>
+<li>
+<p><a href="https://www.linkedin.com/in/jacobrider/"><strong>LinkedIn</strong></a></p>
+</li>
+<li>
+<p><a href="https://github.com/Grow-Myelin"><strong>GitHub</strong></a> </p>
+</li>
+<li>
+<p><a href="https://Grow-Myelin.github.io"><strong>Website</strong></a></p>
+</li>
 </ul>
-<h2 id="project-background">Project Background</h2>
-<p>Twilight Imperium (TI4) is a grand strategy board game known for its intricate diplomacy, expansive empire-building, and epic space battles. TI4's combat involves a blend of strategic planning and randomness. While unit statistics and player decisions play a significant role, the combat system incorporates elements of randomness through dice rolls.</p>
-<h2 id="project-overview">Project Overview</h2>
-<p>This combat simulator for TI4 utilizes Monte Carlo and probability theory to model the distribution of outcomes for in-game combat scenarios. This tool helps players understand the potential outcomes of their strategic decisions in combat, aiding in planning and execution during gameplay.</p>
-<h2 id="key-features">Key Features</h2>
-<ul>
-<li>Monte Carlo simulation methods to predict combat outcomes.</li>
-<li>Probability theory to sample from combinations of probabilities.</li>
-</ul>
-<h2 id="ti4_functions">ti4_functions</h2>
-<p>This document describes a set of functions for simulating combat scenarios using JAX.</p>
-<h2 id="imports">Imports</h2>
-<pre><code class="language-python">import jax
-import jax.numpy as jnp
-from jax import random
-import os
-from typing import Dict, Tuple, Any
-</code></pre>
-<h2 id="types">Types</h2>
-<pre><code class="language-python">KeyType = Tuple[int, float]
-SideType = Dict[KeyType, int]
-RNGKey = Any
-</code></pre>
-<h2 id="functions">Functions</h2>
-<h3 id="apply_hits">apply_hits</h3>
-<pre><code class="language-python">def apply_hits(side: SideType, hits_scored: int, rng_key: RNGKey) -&gt; SideType:
-    &quot;&quot;&quot;
-    Apply hits to a side with JAX, prioritizing dice with lower hit probabilities 
-    and lower health. Incorporates randomness in selecting dice within the same 
-    priority level to take hits. Accepts an RNG key for reproducible randomness.
-
-    Parameters:
-        side (SideType): Dictionary representing the side's units and their stats.
-        hits_scored (int): Number of hits to apply to the side.
-        rng_key (RNGKey): JAX random key for generating random numbers.
-
-    Returns:
-        SideType: Updated side after applying hits.
-    &quot;&quot;&quot;
-</code></pre>
-<h3 id="simulate_combat_round_jax">simulate_combat_round_jax</h3>
-<pre><code class="language-python">def simulate_combat_round_jax(side_a: SideType, side_b: SideType, rng_key: RNGKey) -&gt; Tuple[SideType, SideType]:
-    &quot;&quot;&quot;
-    Simulates a single round of combat between two sides using JAX.
-
-    Parameters:
-        side_a (SideType): First combatant side.
-        side_b (SideType): Second combatant side.
-        rng_key (RNGKey): JAX random key for generating random numbers.
-
-    Returns:
-        Tuple[SideType, SideType]: Updated states of side_a and side_b after combat.
-    &quot;&quot;&quot;
-</code></pre>
-<h3 id="run_combat_until_elimination">run_combat_until_elimination</h3>
-<pre><code class="language-python">def simulate_combat_round_jax(side_a: SideType, side_b: SideType, rng_key: RNGKey) -&gt; Tuple[SideType, SideType]:
-    &quot;&quot;&quot;
-    Simulates a single round of combat between two sides using JAX.
-
-    Parameters:
-        side_a (SideType): First combatant side.
-        side_b (SideType): Second combatant side.
-        rng_key (RNGKey): JAX random key for generating random numbers.
-
-    Returns:
-        Tuple[SideType, SideType]: Updated states of side_a and side_b after combat.
-    &quot;&quot;&quot;
-</code></pre>
-<h3 id="monte_carlo_combat_simulation">monte_carlo_combat_simulation</h3>
-<pre><code class="language-python">def monte_carlo_combat_simulation(initial_side_a: SideType, initial_side_b: SideType, num_simulations: int = 1000) -&gt; Dict[str, float]:
-    &quot;&quot;&quot;
-    Performs a Monte Carlo simulation of combat between two sides over a specified
-    number of simulations to estimate outcome probabilities.
-
-    Parameters:
-        initial_side_a (SideType): Initial state of side A.
-        initial_side_b (SideType): Initial state of side B.
-        num_simulations (int): Number of simulations to run.
-
-    Returns:
-        Dict[str, float]: Probabilities of different outcomes.
-    &quot;&quot;&quot;
-</code></pre>
-<h2 id="example-usage">Example Usage</h2>
-<p>The following is an example of 2 dreadnaughts, each with 2 health hitting 60% of the time fighting vs 6 fighters, each with 1 health hitting 20% of the time.</p>
-<pre><code class="language-python">initial_side_a = {(2, 0.6): 3}
-initial_side_b = {(1, 0.2): 6}
-num_simulations = 10000
-probabilities = monte_carlo_combat_simulation(initial_side_a, initial_side_b, num_simulations)
-print(probabilities)
-
-</code></pre></div>
+<hr />
+<p><a href="../experience/">Experience</a> | <a href="../education/">Education</a> | <a href="../skills/">Skills</a> | <a href="../projects/">Projects</a> | <a href="./">Contact</a></p></div>
             </div>
         </div>
 
