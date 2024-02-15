@@ -46,26 +46,20 @@
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
-  <li class="dropdown-submenu">
-    <a href="#" class="dropdown-item">TI4 Combat Simulator</a>
-    <ul class="dropdown-menu">
-            
 <li>
-    <a href="../ti4_functions/" class="dropdown-item">TI4 Functions</a>
+    <a href="../ti4_combat_simulator/" class="dropdown-item">TI4 Combat Simulator</a>
 </li>
-    </ul>
-  </li>
                                     
 <li>
     <a href="./" class="dropdown-item active">Baseball Pitch Predictor</a>
 </li>
                                     
 <li>
-    <a href="../random_process_generator/" class="dropdown-item">Probabilistic Programming Tools</a>
+    <a href="../prob_prog_tools/" class="dropdown-item">Probabilistic Programming Tools</a>
 </li>
                                     
 <li>
-    <a href="../data_tools_for_economic_research.md" class="dropdown-item">Data Tools for Economic Research</a>
+    <a href="../data_tools/" class="dropdown-item">Data Tools for Economic Research</a>
 </li>
                                 </ul>
                             </li>
@@ -81,12 +75,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../ti4_functions/" class="nav-link">
+                                <a rel="prev" href="../ti4_combat_simulator/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../random_process_generator/" class="nav-link">
+                                <a rel="next" href="../prob_prog_tools/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -122,7 +116,15 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#impact" class="nav-link">Impact</a>
+            <li class="nav-item" data-level="2"><a href="#imports" class="nav-link">Imports</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#functions" class="nav-link">Functions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#example-usage" class="nav-link">Example Usage</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -142,15 +144,40 @@
 <li>Flax</li>
 </ul>
 <h2 id="project-overview">Project Overview</h2>
-<p>Created a predictive model to analyze and forecast baseball pitch types based on historical pitch data. This model assists teams and analysts in anticipating the types of pitches likely to be thrown in different game situations, offering a strategic edge in preparation and in-game decision-making.</p>
+<p>Created a predictive model to analyze and forecast baseball pitch types based on historical pitch data.</p>
 <h2 id="key-features">Key Features</h2>
 <ul>
-<li>Advanced machine learning techniques for accurate pitch type prediction.</li>
-<li>Analysis of historical pitch data to identify patterns and trends.</li>
-<li>Real-time prediction capabilities to support immediate strategic decisions.</li>
+<li>Analysis of pitch frequency over varying time periods to predict the next pitch.</li>
 </ul>
-<h2 id="impact">Impact</h2>
-<p>The Baseball Pitch Predictor has empowered teams with enhanced strategic planning capabilities, allowing for more informed decisions against opposing pitchers.</p></div>
+<h2 id="imports">Imports</h2>
+<pre><code class="language-python">import pandas as pd
+import numpy as np
+from jax import numpy as jnp
+from typing import Tuple, Dict, List
+import time
+</code></pre>
+<h2 id="functions">Functions</h2>
+<h3 id="normalize_counts">normalize_counts</h3>
+<pre><code class="language-python">def normalize_counts(pitch_counts: np.ndarray) -&gt; np.ndarray:
+    &quot;&quot;&quot;
+    Normalize the pitch counts to get a distribution proportion.
+
+    Parameters:
+    - pitch_counts: Array of pitch counts.
+
+    Returns:
+    - np.ndarray: Normalized distribution of pitch counts.
+    &quot;&quot;&quot;
+</code></pre>
+<h3 id="efficient_pitch_distribution">efficient_pitch_distribution</h3>
+<pre><code class="language-python">def efficient_pitch_distribution(df: pd.DataFrame, pitch_types: List[str], filter_conditions: Dict[str, str]) -&gt; np.ndarray:
+    &quot;&quot;&quot;
+    Calculate and normalize the distribution of pitch types, excluding the current event.
+    &quot;&quot;&quot;
+</code></pre>
+<h2 id="example-usage">Example Usage</h2>
+<pre><code class="language-python"># In progress
+</code></pre></div>
             </div>
         </div>
 

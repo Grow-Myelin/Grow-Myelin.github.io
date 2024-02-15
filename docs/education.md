@@ -1,14 +1,15 @@
 # Education
 
-## Bachelor of Science in Mathematics and Economics
+## Bachelors of Science
+### Mathematics and Economics
 
 **Georgia State University, Atlanta, GA** | _Class of 2020_
 
-- Completed a comprehensive curriculum focusing on quantitative analysis, statistical methods, and economic theory.
+- Completed a comprehensive curriculum focusing on rigorous math courses, quantitative analysis, statistical methods, and economic theory.
 
-- Engaged in advanced projects utilizing mathematical models to solve economic problems, demonstrating strong analytical and problem-solving skills.
+- Led a team project modeling asset bubbles with physics equations, using Bloomberg data for model calibration.
 
-- Participated in seminars and workshops on data analysis, enhancing practical knowledge in using statistical software for economic research.
+- Collaborated with the Molkov Theoretical Neuroscience Research Group by developing visualizations for experimental data using Matplotlib and Python to model the feedback mechanisms that underlie the cardio-respiratory system.
 
 ## Certifications
 

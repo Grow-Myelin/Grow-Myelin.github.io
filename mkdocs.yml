@@ -16,9 +16,8 @@ nav:
   - Education: education.md
   - Skills: skills.md
   - Projects:
-      - 'TI4 Combat Simulator':
-          - 'TI4 Functions': 'ti4_functions.md' # This line needs to be indented to align as a sub-item
+      - 'TI4 Combat Simulator': ti4_combat_simulator.md
       - 'Baseball Pitch Predictor': 'baseball_pitch_predictor.md'
-      - 'Probabilistic Programming Tools': 'random_process_generator.md'
-      - 'Data Tools for Economic Research': 'data_tools_for_economic_research.md'
+      - 'Probabilistic Programming Tools': 'prob_prog_tools.md'
+      - 'Data Tools for Economic Research': 'data_tools.md'
   - Contact: contact.md

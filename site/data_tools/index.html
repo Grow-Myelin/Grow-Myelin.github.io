@@ -42,30 +42,24 @@
                             <li class="navitem">
                                 <a href="../skills/" class="nav-link">Skills</a>
                             </li>
-                            <li class="dropdown">
+                            <li class="dropdown active">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
-  <li class="dropdown-submenu">
-    <a href="#" class="dropdown-item">TI4 Combat Simulator</a>
-    <ul class="dropdown-menu">
-            
 <li>
-    <a href="../ti4_functions/" class="dropdown-item">TI4 Functions</a>
+    <a href="../ti4_combat_simulator/" class="dropdown-item">TI4 Combat Simulator</a>
 </li>
-    </ul>
-  </li>
                                     
 <li>
     <a href="../baseball_pitch_predictor/" class="dropdown-item">Baseball Pitch Predictor</a>
 </li>
                                     
 <li>
-    <a href="../random_process_generator/" class="dropdown-item">Probabilistic Programming Tools</a>
+    <a href="../prob_prog_tools/" class="dropdown-item">Probabilistic Programming Tools</a>
 </li>
                                     
 <li>
-    <a href="../data_tools_for_economic_research.md" class="dropdown-item">Data Tools for Economic Research</a>
+    <a href="./" class="dropdown-item active">Data Tools for Economic Research</a>
 </li>
                                 </ul>
                             </li>
@@ -80,6 +74,16 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../prob_prog_tools/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
                     </ul>
                 </div>
             </div>
@@ -112,6 +116,18 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-level="2"><a href="#imports" class="nav-link">Imports</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#classes" class="nav-link">Classes</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#methods" class="nav-link">Methods</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -133,7 +149,197 @@
 <li>Automated data cleaning and processing workflows.</li>
 <li>Ingestion of diverse economic and financial data into a unified database.</li>
 <li>Simplified access to clean, processed data for economic research and analysis.</li>
-</ul></div>
+</ul>
+<h2 id="imports">Imports</h2>
+<pre><code class="language-python">import sqlite3
+import requests
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
+from typing import List, Optional
+</code></pre>
+<h2 id="classes">Classes</h2>
+<h3 id="dataingestor">DataIngestor</h3>
+<pre><code class="language-python">class DataIngestor:
+    &quot;&quot;&quot;
+    A class to ingest and process financial data from a SQLite database.
+    &quot;&quot;&quot;
+
+    def __init__(self, db_path: str, table_names: list, min_date: str):
+        &quot;&quot;&quot;
+        Initialize the DataIngestor with database path, table names, and minimum date.
+
+        Args:
+            db_path (str): Path to the SQLite database.
+            table_names (list): List of table names to process.
+            min_date (str): Minimum date for filtering data.
+        &quot;&quot;&quot;
+        self.db_path = db_path
+        self.table_names = table_names
+        self.min_date = min_date
+</code></pre>
+<h3 id="datafetcher">DataFetcher</h3>
+<pre><code class="language-python">class DataFetcher:
+    &quot;&quot;&quot;
+    A class to fetch and insert financial and economic data into a SQLite database.
+
+    Attributes:
+        db_path (str): The file path for the SQLite database.
+    &quot;&quot;&quot;
+
+    def __init__(self, db_path: str) -&gt; None:
+        &quot;&quot;&quot;
+        Initialize the DataFetcher class.
+
+        Args:
+            db_path (str): The file path for the SQLite database.
+        &quot;&quot;&quot;
+        self.db_path = db_path
+</code></pre>
+<h2 id="methods">Methods</h2>
+<h3 id="datafetcher-methods">DataFetcher Methods</h3>
+<h4 id="create_table">create_table()</h4>
+<pre><code class="language-python">def create_table(self, table_name: str, columns: List[str], is_stock: bool) -&gt; None:
+    &quot;&quot;&quot;
+    Create a table in the SQLite database.
+
+    Args:
+        table_name (str): The name of the table to create.
+        columns (List[str]): A list of column names for the table.
+        isStock (bool): Indicator of whether the data is stock data (True) or economic data (False).
+    &quot;&quot;&quot;
+</code></pre>
+<h4 id="fetch_and_insert_stock_data">fetch_and_insert_stock_data()</h4>
+<pre><code class="language-python">def fetch_and_insert_stock_data(
+    self,
+    stock_ticker: str,
+    api_key: str,
+    report_link: str,
+    from_date: str,
+    to_date: str,
+) -&gt; None:
+    &quot;&quot;&quot;
+    Fetch stock data from an API and insert it into the database.
+
+    Args:
+        stock_ticker (str): The stock ticker symbol.
+        api_key (str): The API key for authentication.
+        report_link (str): The endpoint link for the API request.
+        from_date (str): Start date for the data.
+        to_date (str): End date for the data.
+    &quot;&quot;&quot;
+</code></pre>
+<h4 id="fetch_and_insert_economic_data">fetch_and_insert_economic_data()</h4>
+<pre><code class="language-python">def fetch_and_insert_economic_data(self, api_key: str, report_link: str) -&gt; None:
+    &quot;&quot;&quot;
+    Fetch economic data from an API and insert it into the database.
+
+    Args:
+        api_key (str): The API key for authentication.
+        report_link (str): The endpoint link for the API request.
+    &quot;&quot;&quot;
+</code></pre>
+<h4 id="_insert_data">_insert_data()</h4>
+<pre><code class="language-python">def _insert_data(
+    self,
+    table_name: str,
+    columns: List[str],
+    data: List[dict],
+    ticker: Optional[str] = None,
+) -&gt; None:
+    &quot;&quot;&quot;
+    Insert data into a specified table in the database.
+
+    Args:
+        table_name (str): The name of the table to insert data into.
+        columns (List[str]): The column names for data insertion.
+        data (List[Dict]): The data to be inserted.
+        ticker (Optional[str]): The stock ticker symbol. Defaults to None.
+    &quot;&quot;&quot;
+</code></pre>
+<h3 id="dataingestor-methods">DataIngestor Methods</h3>
+<h4 id="get_column_names">get_column_names()</h4>
+<pre><code class="language-python">def get_column_names(self, conn: sqlite3.Connection, table_name: str) -&gt; list:
+    &quot;&quot;&quot;
+    Retrieve column names for a given table in the database.
+
+    Args:
+        conn (sqlite3.Connection): A connection object to the SQLite database.
+        table_name (str): Name of the table to retrieve columns from.
+
+    Returns:
+        list: A list of column names.
+    &quot;&quot;&quot;
+</code></pre>
+<h4 id="fetch_and_process_data">fetch_and_process_data()</h4>
+<pre><code class="language-python">def fetch_and_process_data(self) -&gt; list:
+    &quot;&quot;&quot;
+    Fetch and process data from the database for each table.
+
+    Returns:
+        list: A list of processed pandas DataFrames.
+    &quot;&quot;&quot;
+</code></pre>
+<h4 id="scale_data">scale_data()</h4>
+<pre><code class="language-python">def scale_data(self, dfs: list) -&gt; pd.DataFrame:
+    &quot;&quot;&quot;
+    Scale the data using StandardScaler.
+
+    Args:
+        dfs (list): List of pandas DataFrames to scale.
+
+    Returns:
+        pd.DataFrame: A DataFrame of scaled features.
+    &quot;&quot;&quot;
+</code></pre>
+<h3 id="utils">utils</h3>
+<h4 id="process_data">process_data()</h4>
+<pre><code class="language-python">def process_data(db_path: str, table_names: list, min_date: str) -&gt; tuple:
+    &quot;&quot;&quot;
+    Process and scale data from the database.
+
+    Args:
+        db_path (str): Path to the SQLite database.
+        table_names (list): List of table names to process.
+        min_date (str): Minimum date for filtering data.
+
+    Returns:
+        tuple: A tuple containing list of DataFrames and scaled DataFrame.
+    &quot;&quot;&quot;
+</code></pre>
+<h4 id="drop_table">drop_table()</h4>
+<pre><code class="language-python">def drop_table(db_path: str, table_name: str) -&gt; None:
+    &quot;&quot;&quot;
+    Drop a table from the database.
+
+    Args:
+        db_path (str): Path to the SQLite database.
+        table_name (str): Name of the table to be dropped.
+    &quot;&quot;&quot;
+</code></pre>
+<h4 id="fetch_stocks_data">fetch_stocks_data()</h4>
+<pre><code class="language-python">def fetch_stocks_data(
+    db_path: str, stocks: List[str], api_key: str, report_link: str
+) -&gt; None:
+    &quot;&quot;&quot;
+    Fetch and insert stock data for multiple stocks into the database.
+
+    Args:
+        db_path (str): The file path for the SQLite database.
+        stocks (List[str]): A list of stock ticker symbols.
+        api_key (str): The API key for authentication.
+        report_link (str): The endpoint link for the API request.
+</code></pre>
+<h4 id="fetch_economic_data">fetch_economic_data()</h4>
+<pre><code class="language-python">def fetch_economic_data(db_path: str, table_names: List[str], api_key: str) -&gt; None:
+    &quot;&quot;&quot;
+    Fetch and insert economic data for multiple series into the database.
+
+    Args:
+        db_path (str): The file path for the SQLite database.
+        table_names (list[str]): A list of economic data series identifiers.
+        api_key (str): The API key for authentication.
+    &quot;&quot;&quot;
+</code></pre></div>
             </div>
         </div>
 
