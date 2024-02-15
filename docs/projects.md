@@ -11,7 +11,7 @@
 - Created a predictive model to analyze and forecast baseball pitch types based on historical pitch data.
 
 
-## [Probabilistic Programming Tools](random_process_generator.md)
+## [Probabilistic Programming Tools](prob_prog_tools.md)
 **Technologies Used**: Python, NumPy, Jax, NumPyro
 
 - Designed a stock market simulation tool that simulates a random levy process and then uses NumPyro infers the parameters used to simulate those processes. 
@@ -20,3 +20,7 @@
 **Technologies Used**: Python, SQL
 
 - Developed a suite of data analysis tools tailored for economic research and the cleaning and ingestion of economic and financial API data into a SQLite database. 
+
+
+---
+[Experience](experience.md) | [Education](education.md) | [Skills](skills.md) | [**Projects**](projects.md) | [Contact](contact.md)

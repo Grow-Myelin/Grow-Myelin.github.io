@@ -118,3 +118,10 @@ probabilities = monte_carlo_combat_simulation(initial_side_a, initial_side_b, nu
 print(probabilities)
 
 ```
+
+---
+[Experience](experience.md) | [Education](education.md) | [Skills](skills.md) | [**Projects**](projects.md) | [Contact](contact.md)
+
+---
+
+[**TI4 Combat Simulator**](ti4_combat_simulator.md) | [Baseball Pitch Predictor](baseball_pitch_predictor.md) | [Probabalistic Programming Tools](prob_prog_tools.md) | [Data Tools](data_tools.md)

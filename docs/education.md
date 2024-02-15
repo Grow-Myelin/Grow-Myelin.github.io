@@ -1,5 +1,3 @@
-# Education
-
 ## Bachelors of Science
 ### Mathematics and Economics
 
@@ -16,3 +14,7 @@
 - Tableau Data Analyst
 
 - Tableau Desktop Specialist
+
+
+---
+[Experience](experience.md) | [**Education**](education.md) | [Skills](skills.md) | [Projects](projects.md) | [Contact](contact.md)

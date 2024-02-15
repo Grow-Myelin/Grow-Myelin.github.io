@@ -15,3 +15,7 @@
 - **Probabilistic Programming**: Fascinated by the application of probabilistic programming for building complex models and simulations
 - **Generative AI**: Interested in exploring the capabilities of generative AI for creating new content and solving unique problems
 - **Data Modeling**: Passionate about constructing accurate data models to uncover insights and inform strategic decision-making
+
+
+---
+[Experience](experience.md) | [Education](education.md) | [**Skills**](skills.md) | [Projects](projects.md) | [Contact](contact.md)

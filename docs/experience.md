@@ -1,5 +1,3 @@
-# Professional Experience
-
 ## Associate Data Engineer
 ### Delta Air Lines
 **Atlanta, GA** | _June 2022 – Present_
@@ -25,3 +23,7 @@
 - Automated routine management reports using Excel, VBA, SAP, and Python saving approximately 50 hours per month for key logistics personnel.
 
 - Contributed to the development of training materials and procedures for new team members, ensuring consistent and accurate document handling.
+
+
+---
+[**Experience**](experience.md) | [Education](education.md) | [Skills](skills.md) | [Projects](projects.md) | [Contact](contact.md)
