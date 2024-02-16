@@ -105,10 +105,6 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#key-features" class="nav-link">Key Features</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
             <li class="nav-item" data-level="2"><a href="#technologies-used" class="nav-link">Technologies Used</a>
               <ul class="nav flex-column">
               </ul>
@@ -144,11 +140,6 @@
 <p><strong><a href="https://github.com/Grow-Myelin/ProbProg/tree/main/ProbProgTools">View Project on GitHub</a></strong></p>
 <h2 id="project-overview">Project Overview</h2>
 <p>Designed tools that simulate a random levy process and then uses NumPyro to infer the parameters used to simulate those processes.</p>
-<h2 id="key-features">Key Features</h2>
-<ul>
-<li>Simulation of processes that resemble stock price movements using random levy processes.</li>
-<li>Parameter inference with NumPyro to understand underlying market dynamics.</li>
-</ul>
 <h2 id="technologies-used">Technologies Used</h2>
 <ul>
 <li>Python</li>
@@ -171,7 +162,7 @@ import seaborn as sns
 from numpyro.infer import MCMC, NUTS
 </code></pre>
 <h2 id="classes">Classes</h2>
-<h3 id="stockmarketsimulator">StockMarketSimulator</h3>
+<h4 id="stockmarketsimulator">StockMarketSimulator</h4>
 <pre><code class="language-python">class StockMarketSimulator:
     &quot;&quot;&quot;
     A simulator for stock market prices using Levy processes with JAX for computation and
@@ -193,7 +184,7 @@ from numpyro.infer import MCMC, NUTS
     &quot;&quot;&quot;
 </code></pre>
 <h2 id="methods">Methods</h2>
-<h3 id="init"><strong>init</strong>()</h3>
+<h4 id="init"><strong>init</strong>()</h4>
 <pre><code class="language-python">def __init__(self, n_industries: int = 8, n_stocks_per_industry: int = 10, base_stock_price: float = 100) -&gt; None:
     &quot;&quot;&quot;
     Initialize the stock market simulator with specified parameters.
@@ -204,11 +195,11 @@ from numpyro.infer import MCMC, NUTS
         base_stock_price (float): The base stock price for scaling initial prices.
     &quot;&quot;&quot;
 </code></pre>
-<h3 id="_initialize_prices">_initialize_prices()</h3>
+<h4 id="_initialize_prices">_initialize_prices()</h4>
 <pre><code class="language-python">def _initialize_prices(self) -&gt; None:
     &quot;&quot;&quot;Initialize the stock prices using Pareto distribution for each industry.&quot;&quot;&quot;
 </code></pre>
-<h3 id="_simulate_stock_prices">_simulate_stock_prices()</h3>
+<h4 id="_simulate_stock_prices">_simulate_stock_prices()</h4>
 <pre><code class="language-python">def simulate_stock_prices(self, n_days: int = 252) -&gt; pd.DataFrame:
     &quot;&quot;&quot;
     Simulate stock prices over a given number of days.
@@ -220,7 +211,7 @@ from numpyro.infer import MCMC, NUTS
         pd.DataFrame: A DataFrame containing the simulated stock prices.
     &quot;&quot;&quot;
 </code></pre>
-<h3 id="_apply_correlation">_apply_correlation</h3>
+<h4 id="_apply_correlation">_apply_correlation</h4>
 <pre><code class="language-python">def _apply_correlation(self, increments: np.ndarray) -&gt; np.ndarray:
     &quot;&quot;&quot;
     Apply a correlation matrix to the increments using Cholesky decomposition.
@@ -233,7 +224,7 @@ from numpyro.infer import MCMC, NUTS
     &quot;&quot;&quot;
 </code></pre>
 <h2 id="functions">Functions</h2>
-<h3 id="plot_posteriors">plot_posteriors()</h3>
+<h4 id="plot_posteriors">plot_posteriors()</h4>
 <pre><code class="language-python">def plot_posteriors(posterior_samples: Dict[str, jnp.ndarray], industry: str) -&gt; None:
     &quot;&quot;&quot;
     Plots the posterior distributions for a given industry.
@@ -243,7 +234,7 @@ from numpyro.infer import MCMC, NUTS
         industry (str): The name of the industry for which the posterior distributions are plotted.
     &quot;&quot;&quot;
 </code></pre>
-<h3 id="run_bayesian_inference">run_bayesian_inference()</h3>
+<h4 id="run_bayesian_inference">run_bayesian_inference()</h4>
 <pre><code class="language-python">def run_bayesian_inference(simulator: DI.StockMarketSimulator, n_samples: int = 500, n_warmup: int = 100) -&gt; None:
     &quot;&quot;&quot;
     Runs Bayesian inference for each industry and plots the posterior distributions.
@@ -254,7 +245,7 @@ from numpyro.infer import MCMC, NUTS
         n_warmup (int): Number of warmup steps for the sampler.
     &quot;&quot;&quot;
 </code></pre>
-<h3 id="plot_stock_prices">plot_stock_prices()</h3>
+<h4 id="plot_stock_prices">plot_stock_prices()</h4>
 <pre><code class="language-python">def plot_stock_prices(simulator: DI.StockMarketSimulator) -&gt; None:
     &quot;&quot;&quot;
     Plot the simulated stock prices for all stocks in the simulation.
@@ -266,7 +257,7 @@ from numpyro.infer import MCMC, NUTS
     to a file named 'simulated_stock_prices.png' in the 'plots' directory.
     &quot;&quot;&quot;
 </code></pre>
-<h3 id="plot_stock_prices_by_industry">plot_stock_prices_by_industry()</h3>
+<h4 id="plot_stock_prices_by_industry">plot_stock_prices_by_industry()</h4>
 <pre><code class="language-python">def plot_stock_prices_by_industry(simulator: DI.StockMarketSimulator) -&gt; None:
     &quot;&quot;&quot;
     Plot the simulated stock prices for each industry separately.
