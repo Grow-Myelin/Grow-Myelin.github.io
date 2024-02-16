@@ -162,7 +162,7 @@ SideType = Dict[KeyType, int]
 RNGKey = Any
 </code></pre>
 <h2 id="functions">Functions</h2>
-<h3 id="apply_hits">apply_hits</h3>
+<h4 id="apply_hits">apply_hits</h4>
 <pre><code class="language-python">def apply_hits(side: SideType, hits_scored: int, rng_key: RNGKey) -&gt; SideType:
     &quot;&quot;&quot;
     Apply hits to a side with JAX, prioritizing dice with lower hit probabilities 
@@ -178,7 +178,7 @@ RNGKey = Any
         SideType: Updated side after applying hits.
     &quot;&quot;&quot;
 </code></pre>
-<h3 id="simulate_combat_round_jax">simulate_combat_round_jax</h3>
+<h4 id="simulate_combat_round_jax">simulate_combat_round_jax</h4>
 <pre><code class="language-python">def simulate_combat_round_jax(side_a: SideType, side_b: SideType, rng_key: RNGKey) -&gt; Tuple[SideType, SideType]:
     &quot;&quot;&quot;
     Simulates a single round of combat between two sides using JAX.
@@ -192,7 +192,7 @@ RNGKey = Any
         Tuple[SideType, SideType]: Updated states of side_a and side_b after combat.
     &quot;&quot;&quot;
 </code></pre>
-<h3 id="run_combat_until_elimination">run_combat_until_elimination</h3>
+<h4 id="run_combat_until_elimination">run_combat_until_elimination</h4>
 <pre><code class="language-python">def simulate_combat_round_jax(side_a: SideType, side_b: SideType, rng_key: RNGKey) -&gt; Tuple[SideType, SideType]:
     &quot;&quot;&quot;
     Simulates a single round of combat between two sides using JAX.
@@ -206,7 +206,7 @@ RNGKey = Any
         Tuple[SideType, SideType]: Updated states of side_a and side_b after combat.
     &quot;&quot;&quot;
 </code></pre>
-<h3 id="monte_carlo_combat_simulation">monte_carlo_combat_simulation</h3>
+<h4 id="monte_carlo_combat_simulation">monte_carlo_combat_simulation</h4>
 <pre><code class="language-python">def monte_carlo_combat_simulation(initial_side_a: SideType, initial_side_b: SideType, num_simulations: int = 1000) -&gt; Dict[str, float]:
     &quot;&quot;&quot;
     Performs a Monte Carlo simulation of combat between two sides over a specified
