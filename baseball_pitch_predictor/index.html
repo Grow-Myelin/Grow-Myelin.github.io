@@ -105,10 +105,6 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#key-features" class="nav-link">Key Features</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
             <li class="nav-item" data-level="2"><a href="#technologies-used" class="nav-link">Technologies Used</a>
               <ul class="nav flex-column">
               </ul>
@@ -140,10 +136,6 @@
 <p><strong><a href="https://github.com/Grow-Myelin/ProbProg/tree/main/baseball">View Project on GitHub</a></strong></p>
 <h2 id="project-overview">Project Overview</h2>
 <p>Created a predictive model to analyze and forecast baseball pitch types based on historical pitch data.</p>
-<h2 id="key-features">Key Features</h2>
-<ul>
-<li>Analysis of pitch frequency over varying time periods to predict the next pitch.</li>
-</ul>
 <h2 id="technologies-used">Technologies Used</h2>
 <ul>
 <li>Python</li>
@@ -167,7 +159,7 @@ from typing import Tuple, Dict, List
 import time
 </code></pre>
 <h2 id="classes">Classes</h2>
-<h3 id="pitchpredictormodel">PitchPredictorModel</h3>
+<h4 id="pitchpredictormodel">PitchPredictorModel</h4>
 <pre><code class="language-python">class PitchPredictorModel(nn.Module):
     num_outputs: int  # Number of unique pitch types
 
@@ -184,7 +176,7 @@ import time
         &quot;&quot;&quot;
 </code></pre>
 <h2 id="functions">Functions</h2>
-<h3 id="normalize_counts">normalize_counts</h3>
+<h4 id="normalize_counts">normalize_counts</h4>
 <pre><code class="language-python">def normalize_counts(pitch_counts: np.ndarray) -&gt; np.ndarray:
     &quot;&quot;&quot;
     Normalize the pitch counts to get a distribution proportion.
@@ -196,7 +188,7 @@ import time
     - np.ndarray: Normalized distribution of pitch counts.
     &quot;&quot;&quot;
 </code></pre>
-<h3 id="efficient_pitch_distribution">efficient_pitch_distribution</h3>
+<h4 id="efficient_pitch_distribution">efficient_pitch_distribution</h4>
 <pre><code class="language-python">def efficient_pitch_distribution(df: pd.DataFrame, pitch_types: List[str], filter_conditions: Dict[str, str]) -&gt; np.ndarray:
     &quot;&quot;&quot;Calculate and normalize the distribution of pitch types, excluding the current event.
 
@@ -209,7 +201,7 @@ import time
     - np.ndarray: Normalized distribution of pitch counts.
     &quot;&quot;&quot;
 </code></pre>
-<h3 id="return_pitch_distributions">return_pitch_distributions</h3>
+<h4 id="return_pitch_distributions">return_pitch_distributions</h4>
 <pre><code class="language-python">def return_pitch_distributions(df: pd.DataFrame, df_row: pd.Series, pitch_types: List[str]) -&gt; jnp.ndarray:
     &quot;&quot;&quot;Calculate pitch distributions for different contexts based on a row from the dataframe.
 
@@ -222,7 +214,7 @@ import time
     - jnp.ndarray: Stack of normalized pitch distributions for different contexts.
     &quot;&quot;&quot;
 </code></pre>
-<h3 id="return_current_pitch">return_current_pitch</h3>
+<h4 id="return_current_pitch">return_current_pitch</h4>
 <pre><code class="language-python">def return_current_pitch(df_row: pd.Series, pitch_types: List[str]) -&gt; List[int]:
     &quot;&quot;&quot;Generate a one-hot encoded vector for the current pitch type.
 
@@ -234,7 +226,7 @@ import time
     - List[int]: One-hot encoded vector representing the current pitch type.
     &quot;&quot;&quot;
 </code></pre>
-<h3 id="clean_data">clean_data()</h3>
+<h4 id="clean_data">clean_data()</h4>
 <pre><code class="language-python">def clean_data() -&gt; Tuple[jnp.ndarray, jnp.ndarray]:
     &quot;&quot;&quot;Load, preprocess data, and compute pitch distributions.
 
@@ -242,7 +234,7 @@ import time
     - Tuple[jnp.ndarray, jnp.ndarray]: Tuple of inputs and outputs for modeling.
     &quot;&quot;&quot;
 </code></pre>
-<h3 id="cross_entropy_loss">cross_entropy_loss()</h3>
+<h4 id="cross_entropy_loss">cross_entropy_loss()</h4>
 <pre><code class="language-python">def cross_entropy_loss(logits: jnp.ndarray, labels: jnp.ndarray) -&gt; jnp.ndarray:
     &quot;&quot;&quot;
     Computes the cross-entropy loss between logits and labels.
@@ -255,7 +247,7 @@ import time
     - jnp.ndarray: Cross-entropy loss.
     &quot;&quot;&quot;
 </code></pre>
-<h3 id="compute_accuracy">compute_accuracy()</h3>
+<h4 id="compute_accuracy">compute_accuracy()</h4>
 <pre><code class="language-python">def compute_accuracy(logits: jnp.ndarray, labels: jnp.ndarray) -&gt; float:
     &quot;&quot;&quot;
     Computes the accuracy of the predictions.
@@ -268,7 +260,7 @@ import time
     - float: Accuracy of predictions.
     &quot;&quot;&quot;
 </code></pre>
-<h3 id="create_train_state">create_train_state()</h3>
+<h4 id="create_train_state">create_train_state()</h4>
 <pre><code class="language-python">def create_train_state(rng: PRNGKey, learning_rate: float, num_outputs: int) -&gt; TrainState:
     &quot;&quot;&quot;
     Initializes the model's train state.
@@ -282,7 +274,7 @@ import time
     - TrainState: The initialized training state.
     &quot;&quot;&quot;
 </code></pre>
-<h3 id="train_step">train_step()</h3>
+<h4 id="train_step">train_step()</h4>
 <pre><code class="language-python">def train_step(state: TrainState, batch: dict) -&gt; tuple:
     &quot;&quot;&quot;
     Performs a single training step.
@@ -295,7 +287,7 @@ import time
     - tuple: Updated state, loss, and accuracy for the batch.
     &quot;&quot;&quot;
 </code></pre>
-<h3 id="train_model">train_model()</h3>
+<h4 id="train_model">train_model()</h4>
 <pre><code class="language-python">def train_model(num_epochs: int, learning_rate: float, num_outputs: int, train_data: list) -&gt; None:
     &quot;&quot;&quot;
     Trains the model.
@@ -313,8 +305,6 @@ import time
     n = outputs.shape[1]
     learning_rate = 0.001
     num_epochs = 10
-    # Placeholder class weights calculation
-    # You should calculate these based on your dataset's specific class distribution
     class_weights = jnp.array([1.0,5.0,5.0,5.0])  # Example weights for 3 classes
 
 
@@ -341,12 +331,6 @@ import time
         epoch_loss /= num_batches
         epoch_accuracy /= num_batches
         print(f&quot;Epoch {epoch}, Loss: {epoch_loss}, Accuracy: {epoch_accuracy}&quot;)
-
-
-    # The rest of your code remains unchanged up to the prediction part...
-
-    # No need to reinitialize the model if we are using the trained state
-    # model = PitchPredictorModel(num_outputs=n)  # Remove or comment out this line
 
     # Initialize a list to store prediction logits
     test_pred_logits = []
