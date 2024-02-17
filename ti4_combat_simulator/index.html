@@ -146,15 +146,18 @@
 <ul>
 <li>Python</li>
 <li>Jax</li>
-<li>Matplotlib</li>
+<li>Seaborn</li>
 </ul>
 <p>This document describes a set of functions for simulating combat scenarios using JAX.</p>
 <h2 id="imports">Imports</h2>
-<pre><code class="language-python">import jax
-import jax.numpy as jnp
+<pre><code class="language-python">import jax.numpy as jnp
 from jax import random
 import os
 from typing import Dict, Tuple, Any
+import matplotlib.pyplot as plt
+from collections import defaultdict
+import pandas as pd
+import seaborn as sns
 </code></pre>
 <h2 id="types">Types</h2>
 <pre><code class="language-python">KeyType = Tuple[int, float]
