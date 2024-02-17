@@ -178,47 +178,113 @@ RNGKey = Any
         SideType: Updated side after applying hits.
     &quot;&quot;&quot;
 </code></pre>
-<h4 id="simulate_combat_round_jax">simulate_combat_round_jax</h4>
-<pre><code class="language-python">def simulate_combat_round_jax(side_a: SideType, side_b: SideType, rng_key: RNGKey) -&gt; Tuple[SideType, SideType]:
+<h4 id="simulate_combat_round">simulate_combat_round</h4>
+<pre><code class="language-python">def simulate_combat_round(side_a: SideType, side_b: SideType, rng_key: RNGKey) -&gt; Tuple[SideType, SideType]:
     &quot;&quot;&quot;
-    Simulates a single round of combat between two sides using JAX.
+    Simulates a single round of combat between two sides.
 
     Parameters:
-        side_a (SideType): First combatant side.
-        side_b (SideType): Second combatant side.
-        rng_key (RNGKey): JAX random key for generating random numbers.
+        side_a (SideType): The initial state of side A.
+        side_b (SideType): The initial state of side B.
+        rng_key (RNGKey): A random key for JAX's random number generation.
 
     Returns:
-        Tuple[SideType, SideType]: Updated states of side_a and side_b after combat.
+        Tuple[SideType, SideType]: The updated states of side A and side B after the combat round.
     &quot;&quot;&quot;
 </code></pre>
 <h4 id="run_combat_until_elimination">run_combat_until_elimination</h4>
-<pre><code class="language-python">def simulate_combat_round_jax(side_a: SideType, side_b: SideType, rng_key: RNGKey) -&gt; Tuple[SideType, SideType]:
+<pre><code class="language-python">def run_combat_until_elimination(side_a: SideType, side_b: SideType, rng_key: RNGKey, max_rounds: int = 1000) -&gt; Tuple[SideType, SideType, int, SideType, SideType]:
     &quot;&quot;&quot;
-    Simulates a single round of combat between two sides using JAX.
+    Runs combat rounds between two sides until one side is eliminated or a maximum
+    number of rounds is reached, also returns the initial states.
 
     Parameters:
-        side_a (SideType): First combatant side.
-        side_b (SideType): Second combatant side.
-        rng_key (RNGKey): JAX random key for generating random numbers.
+    - side_a (SideType): Initial state of side A.
+    - side_b (SideType): Initial state of side B.
+    - rng_key (RNGKey): JAX random key for generating random numbers.
+    - max_rounds (int, optional): Maximum number of rounds to simulate. Defaults to 1000.
 
     Returns:
-        Tuple[SideType, SideType]: Updated states of side_a and side_b after combat.
+    - Tuple[SideType, SideType, int, SideType, SideType]: Final states of side A and side B,
+      the number of rounds simulated, and copies of the initial states of side A and side B.
+    &quot;&quot;&quot;
+</code></pre>
+<h4 id="state_to_string">state_to_string</h4>
+<pre><code class="language-python">def state_to_string(state: SideType) -&gt; str:
+    &quot;&quot;&quot;
+    Converts a side's state to a string representation for consistent key usage.
+
+    This function sorts the units in the side by their hit probabilities and health
+    before converting to string, ensuring consistent string representation for
+    identical states.
+
+    Parameters:
+    - state (SideType): The current state of the side's units, represented as a
+      dictionary with keys as (unit health, hit probability) and values as unit counts.
+
+    Returns:
+    - str: A string representation of the state, sorted by unit properties.
+    &quot;&quot;&quot;
+</code></pre>
+<h4 id="calculate_health">calculate_health</h4>
+<pre><code class="language-python">def calculate_health(state_str: str) -&gt; int:
+    &quot;&quot;&quot;
+    Calculates the total health score based on a side's state string representation.
+
+    This function interprets the state string, extracting unit health and count
+    to compute the overall health score of the side.
+
+    Parameters:
+    - state_str (str): A string representation of a side's state, typically
+      obtained from `state_to_string` function.
+
+    Returns:
+    - int: The total health score calculated from the state.
     &quot;&quot;&quot;
 </code></pre>
 <h4 id="monte_carlo_combat_simulation">monte_carlo_combat_simulation</h4>
-<pre><code class="language-python">def monte_carlo_combat_simulation(initial_side_a: SideType, initial_side_b: SideType, num_simulations: int = 1000) -&gt; Dict[str, float]:
+<pre><code class="language-python">def mc(initial_side_a,initial_side_b,num_simulations):
     &quot;&quot;&quot;
-    Performs a Monte Carlo simulation of combat between two sides over a specified
-    number of simulations to estimate outcome probabilities.
+    Conducts a Monte Carlo simulation to estimate the outcome probabilities of combat between two sides.
 
     Parameters:
-        initial_side_a (SideType): Initial state of side A.
-        initial_side_b (SideType): Initial state of side B.
-        num_simulations (int): Number of simulations to run.
+        initial_side_a (SideType): The initial state of side A.
+        initial_side_b (SideType): The initial state of side B.
+        num_simulations (int): The number of simulations to run.
 
     Returns:
-        Dict[str, float]: Probabilities of different outcomes.
+        Tuple[List[str], List[int]]: The outcomes (as labels) and their counts.
+    &quot;&quot;&quot;
+</code></pre>
+<h4 id="normalize">normalize</h4>
+<pre><code class="language-python">def normalize(all_labels,all_values):
+    &quot;&quot;&quot;
+    Normalizes the simulation counts to probabilities
+
+    Parameters:
+        all_labels (List[str]): The labels for each outcome.
+        all_values (List[int]): The counts for each outcome.
+        filename (str): The file path to save the plot.
+
+    Returns:
+        data (pd.DataFrame): data to plot
+    &quot;&quot;&quot;
+</code></pre>
+<h4 id="plot_and_simulate_data">plot_and_simulate_data</h4>
+<pre><code class="language-python">def plot_and_simulate_data(initial_side_a,initial_side_b,num_simulations):
+    &quot;&quot;&quot;
+    Runs Monte Carlo simulations to estimate combat outcomes between two sides and plots the results.
+
+    This function orchestrates the simulation process by calling the appropriate functions to
+    simulate combat, calculate outcome probabilities, and plot the probabilities in a bar plot.
+
+    Parameters:
+    - initial_side_a (SideType): The initial state of side A.
+    - initial_side_b (SideType): The initial state of side B.
+    - num_simulations (int): The number of simulations to run for estimating outcomes.
+
+    The function does not return a value but generates and saves a plot visualizing the
+    probability of different outcomes based on the simulations.
     &quot;&quot;&quot;
 </code></pre>
 <h2 id="example-usage">Example Usage</h2>
@@ -226,9 +292,7 @@ RNGKey = Any
 <pre><code class="language-python">initial_side_a = {(2, 0.6): 3}
 initial_side_b = {(1, 0.2): 6}
 num_simulations = 10000
-probabilities = monte_carlo_combat_simulation(initial_side_a, initial_side_b, num_simulations)
-print(probabilities)
-
+plot_and_simulate_data(initial_side_a,initial_side_b,num_simulations)
 </code></pre>
 <hr />
 <p><a href="../experience/">Experience</a> | <a href="../education/">Education</a> | <a href="../skills/">Skills</a> | <a href="../projects/"><strong>Projects</strong></a></p>
