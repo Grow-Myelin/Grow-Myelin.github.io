@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta name="author" content="Jacob Rider">
+        <link rel="canonical" href="https://Grow-Myelin.github.io/prob_prog_ex/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Probabilistic Programming Examples - Jacob Rider's Portfolio</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atelier-cave-light.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Jacob Rider's Portfolio</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../experience/" class="nav-link">Experience</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../education/" class="nav-link">Education</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../skills/" class="nav-link">Skills</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../ti4_combat_simulator/" class="dropdown-item">TI4 Combat Simulator</a>
+</li>
+                                    
+<li>
+    <a href="../baseball_pitch_predictor/" class="dropdown-item">Baseball Pitch Predictor</a>
+</li>
+                                    
+<li>
+    <a href="../prob_prog_tools/" class="dropdown-item">Probabilistic Programming Tools</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">Probabilistic Programming Examples</a>
+</li>
+                                    
+<li>
+    <a href="../data_tools/" class="dropdown-item">Data Tools for Economic Research</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../prob_prog_tools/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../data_tools/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#probabilistic-programming-examples" class="nav-link">Probabilistic Programming Examples</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#project-overview" class="nav-link">Project Overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#technologies-used" class="nav-link">Technologies Used</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#imports" class="nav-link">Imports</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#example-1-coinflip" class="nav-link">Example 1 - Coinflip</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#example-2-linear-regression" class="nav-link">Example 2 - Linear Regression</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#example-3-lorenz-system" class="nav-link">Example 3 - Lorenz System</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="probabilistic-programming-examples">Probabilistic Programming Examples</h1>
+<p><strong><a href="https://github.com/Grow-Myelin/ProbProg/tree/main/ProbProgExamples">View Project on GitHub</a></strong></p>
+<h2 id="project-overview">Project Overview</h2>
+<p>Created several introductory examples using NumPyro including a model of the lorenz system.</p>
+<hr />
+<h2 id="technologies-used">Technologies Used</h2>
+<ul>
+<li>Python</li>
+<li>Jax</li>
+<li>NumPyro</li>
+<li>Matplotlib</li>
+</ul>
+<hr />
+<h2 id="imports">Imports</h2>
+<pre><code class="language-python">import argparse
+import jax
+import jax.numpy as jnp
+from jax import random, jit
+from jax.experimental.ode import odeint
+import matplotlib
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
+import numpyro
+import numpyro.distributions as dist
+from numpyro.infer import MCMC, NUTS, Predictive
+import arviz as az
+import os
+from typing import Optional, Sequence
+</code></pre>
+<hr />
+<h2 id="example-1-coinflip">Example 1 - Coinflip</h2>
+<p>**<a href="../pdfs/posterior_plot_coinflip.pdf">Coinflip Posterior Plot</a></p>
+<pre><code class="language-python">def coin_flip_model(observed_data: jnp.ndarray) -&gt; None:
+    &quot;&quot;&quot;
+    Bayesian model for coin flipping using a Bernoulli distribution.
+
+    Parameters:
+    - observed_data: jnp.ndarray, array of observed coin flips (0s and 1s).
+    &quot;&quot;&quot;
+    prob_heads = numpyro.sample(&quot;prob_heads&quot;, dist.Uniform(0, 1))
+    numpyro.sample(&quot;obs&quot;, dist.Bernoulli(prob_heads), obs=observed_data)
+
+def run_mcmc(model: callable, data: jnp.ndarray, num_warmup: int = 1000, num_samples: int = 1000, num_chains: int = 1) -&gt; MCMC:
+    &quot;&quot;&quot;
+    Runs MCMC for a given Bayesian model and observed data.
+
+    Parameters:
+    - model: Callable, the Bayesian model function.
+    - data: jnp.ndarray, the observed data to fit the model to.
+    - num_warmup: int, number of warmup steps.
+    - num_samples: int, number of samples to draw.
+    - num_chains: int, number of MCMC chains to run.
+
+    Returns:
+    - MCMC object after running the MCMC algorithm.
+    &quot;&quot;&quot;
+    nuts_kernel = NUTS(model)
+    mcmc = MCMC(nuts_kernel, num_warmup=num_warmup, num_samples=num_samples, num_chains=num_chains)
+    mcmc.run(jax.random.PRNGKey(0), observed_data=data)
+    return mcmc
+
+def main():
+    # Generate observed data for a biased coin
+    key = random.PRNGKey(0)
+    prob_heads = 0.7
+    num_flips = 100
+    observed_data = (random.uniform(key, (num_flips,)) &lt; prob_heads).astype(int)
+
+    # Run MCMC
+    mcmc = run_mcmc(coin_flip_model, observed_data)
+
+    # Convert to ArviZ InferenceData
+    idata = az.from_numpyro(mcmc)
+
+    # Plotting the posterior
+    ax = az.plot_posterior(idata, var_names=[&quot;prob_heads&quot;])
+
+    # Save the figure
+    plt.savefig(&quot;coin_flip_posterior_plot.pdf&quot;)
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<hr />
+<h2 id="example-2-linear-regression">Example 2 - Linear Regression</h2>
+<p>**<a href="../pdfs/linear_regression_posterior_plot.pdf">Linear Regression Posterior Plot</a></p>
+<pre><code class="language-python">
+# True parameters for generating synthetic data
+true_slope: float = 2.5
+true_intercept: float = -1.0
+noise_scale: float = 1.0
+
+# Generate synthetic data
+np.random.seed(0)
+x: np.ndarray = np.linspace(0, 1, 100)
+noise: np.ndarray = np.random.normal(scale=noise_scale, size=x.shape)
+y: np.ndarray = true_slope * x + true_intercept + noise
+
+def linear_regression_model(x: np.ndarray, y: Optional[np.ndarray] = None) -&gt; None:
+    &quot;&quot;&quot;
+    Bayesian linear regression model using numpyro.
+
+    Parameters:
+    - x: np.ndarray, predictor variable(s).
+    - y: Optional[np.ndarray], response variable. If None, the model performs prediction.
+    &quot;&quot;&quot;
+    slope = numpyro.sample('slope', dist.Normal(0, 10))
+    intercept = numpyro.sample('intercept', dist.Normal(0, 10))
+    sigma = numpyro.sample('sigma', dist.Exponential(1.0))
+    mean = slope * x + intercept
+    with numpyro.plate('data', x.shape[0]):
+        numpyro.sample('obs', dist.Normal(mean, sigma), obs=y)
+
+def main():
+    # Set up the NUTS kernel and run MCMC
+    nuts_kernel = NUTS(linear_regression_model)
+    mcmc = MCMC(nuts_kernel, num_warmup=500, num_samples=1000)
+    mcmc.run(jax.random.PRNGKey(0), x=x, y=y)
+
+    # Get the samples and convert to ArviZ InferenceData object
+    samples = mcmc.get_samples()
+    idata = az.from_numpyro(mcmc)
+
+    # Plot the posterior distributions and save the plot
+    az.plot_posterior(idata, var_names=['slope', 'intercept', 'sigma'])
+    plt.savefig('plots/linear_regression_posterior_plot.png')
+
+    # Summary of the posterior distribution
+    print(az.summary(idata, var_names=['slope', 'intercept', 'sigma']))
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<h2 id="example-3-lorenz-system">Example 3 - Lorenz System</h2>
+<p>**<a href="../pdfs/lorenz_plot.pdf">Lorenz System Prediction Plot</a></p>
+<pre><code class="language-python">
+matplotlib.use(&quot;Agg&quot;)  # noqa: E402
+
+@jit
+def dz_dt(z, t, theta):
+    &quot;&quot;&quot;
+    Computes the derivative of the Lorenz system at a point.
+
+    Parameters:
+    - z: jnp.ndarray, current state of the system [x, y, z].
+    - t: float, current time (unused as Lorenz equations are autonomous).
+    - theta: jnp.ndarray, parameters of the system [sigma, rho, beta].
+
+    Returns:
+    - jnp.ndarray, derivative [dx/dt, dy/dt, dz/dt].
+    &quot;&quot;&quot;
+    x, y, z = z
+    sigma, rho, beta = theta
+    dx_dt = sigma * (y - x)
+    dy_dt = x * (rho - z) - y
+    dz_dt = x * y - beta * z
+    return jnp.array([dx_dt, dy_dt, dz_dt])
+
+
+def generate_synthetic_data(theta, z_init, N):
+    &quot;&quot;&quot;
+    Generates synthetic data using the Lorenz model.
+
+    Parameters:
+    - theta: jnp.ndarray, parameters for the Lorenz model.
+    - z_init: jnp.ndarray, initial state of the system.
+    - N: int, number of data points to generate.
+
+    Returns:
+    - jnp.ndarray, generated data points.
+    &quot;&quot;&quot;
+    ts = jnp.linspace(0.0, N-1, N)
+    z_init = jnp.array(z_init, dtype=jnp.float32)
+    theta = jnp.array(theta, dtype=jnp.float32)
+
+    z = odeint(dz_dt, z_init, ts, theta, rtol=1e-6, atol=1e-5, mxstep=1000)
+    return z
+
+
+def model(N, y=None):
+    &quot;&quot;&quot;
+    Bayesian model for inference using the Lorenz system.
+
+    Parameters:
+    - N: int, number of data points.
+    - y: jnp.ndarray, observed data points.
+    &quot;&quot;&quot;
+    z_init = numpyro.sample(&quot;z_init&quot;, dist.LogNormal(jnp.log(10), 1).expand([3]))
+    ts = jnp.linspace(0.0, N-1, N)
+    theta = numpyro.sample(
+        &quot;theta&quot;,
+        dist.TruncatedNormal(
+            low=0.0,
+            loc=jnp.array([10.0, 28.0, 8.0 / 3.0]),
+            scale=jnp.array([0.5, 0.5, 0.5]),
+        ),
+    )
+    z = odeint(dz_dt, z_init, ts, theta, rtol=1e-6, atol=1e-5, mxstep=1000)
+
+    sigma = numpyro.sample(&quot;sigma&quot;, dist.Exponential(1).expand([3]))
+    numpyro.sample(&quot;y&quot;, dist.Normal(z, sigma), obs=y)
+
+
+def main(args):
+    &quot;&quot;&quot;
+    Main function to perform Bayesian inference and plot results.
+
+    Parameters:
+    - args: argparse.Namespace, command line arguments.
+    &quot;&quot;&quot;
+    # Parameters for synthetic data
+    true_theta = jnp.array([10.0, 28.0, 8.0 / 3.0])
+    z_init = jnp.array([1.0, 1.0, 1.0])
+    N = 30
+
+    # Generate synthetic data
+    synthetic_data = generate_synthetic_data(true_theta, z_init, N)
+
+    # Bayesian inference
+    mcmc = MCMC(
+        NUTS(model, dense_mass=True),
+        num_warmup=args.num_warmup,
+        num_samples=args.num_samples,
+        num_chains=args.num_chains,
+        progress_bar=True,
+    )
+    mcmc.run(PRNGKey(1), N=N, y=synthetic_data)
+    mcmc.print_summary()
+
+    # Prediction
+    pred = Predictive(model, mcmc.get_samples())(PRNGKey(2), N)[&quot;y&quot;]
+    mu = jnp.mean(pred, 0)
+    pi = jnp.percentile(pred, jnp.array([10, 90]), 0)
+
+    # Plotting
+    sns.set_theme(style=&quot;whitegrid&quot;)
+    fig = plt.figure(figsize=(8, 6), constrained_layout=True)
+    ax = fig.add_subplot(111, projection='3d')
+    ax.plot(synthetic_data[:, 0], synthetic_data[:, 1], synthetic_data[:, 2], &quot;r-&quot;, label=&quot;synthetic data&quot;)
+    ax.plot(mu[:, 0], mu[:, 1], mu[:, 2], &quot;b--&quot;, label=&quot;predicted&quot;)
+    ax.set_xlabel(&quot;X Axis&quot;)
+    ax.set_ylabel(&quot;Y Axis&quot;)
+    ax.set_zlabel(&quot;Z Axis&quot;)
+    plt.title(&quot;Lorenz Attractor: Synthetic Data and Predicted Trajectory&quot;)
+    plt.legend()
+
+    plt.savefig(&quot;plots/lorenz_plot.pdf&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    assert numpyro.__version__.startswith(&quot;0.13.2&quot;)
+    parser = argparse.ArgumentParser(description=&quot;Lorenz Model&quot;)
+    parser.add_argument(&quot;-n&quot;, &quot;--num-samples&quot;, nargs=&quot;?&quot;, default=500, type=int)
+    parser.add_argument(&quot;--num-warmup&quot;, nargs=&quot;?&quot;, default=100, type=int)
+    parser.add_argument(&quot;--num-chains&quot;, nargs=&quot;?&quot;, default=1, type=int)
+    parser.add_argument(&quot;--device&quot;, default=&quot;cpu&quot;, type=str, help='use &quot;cpu&quot; or &quot;gpu&quot;.')
+    args = parser.parse_args()
+
+    numpyro.set_platform(args.device)
+    numpyro.set_host_device_count(args.num_chains)
+
+    main(args)
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/jquery-3.6.0.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
