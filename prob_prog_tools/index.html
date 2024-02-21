@@ -113,7 +113,19 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#imports" class="nav-link">Imports</a>
+            <li class="nav-item" data-level="2"><a href="#hmc-imports" class="nav-link">HMC Imports</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#hmc-functions" class="nav-link">HMC Functions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#example-usage" class="nav-link">Example Usage</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#random-process-imports" class="nav-link">Random Process Imports</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -129,7 +141,7 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#example-usage" class="nav-link">Example Usage</a>
+            <li class="nav-item" data-level="2"><a href="#example-usage_1" class="nav-link">Example Usage</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -143,7 +155,9 @@
 <h1 id="probabilistic-programming-tools">Probabilistic Programming Tools</h1>
 <p><strong><a href="https://github.com/Grow-Myelin/ProbProg/tree/main/ProbProgTools">View Project on GitHub</a></strong></p>
 <h2 id="project-overview">Project Overview</h2>
-<p>Designed tools that simulate a random levy process and then uses NumPyro to infer the parameters used to simulate those processes.</p>
+<p>Designed tools for probabalistic programming with the following purposes:
+- Run a Hamiltonian Monte Carlo Sampler in native JAX
+- Simulate a random levy process and then uses NumPyro to infer the parameters used to simulate those processes</p>
 <h2 id="technologies-used">Technologies Used</h2>
 <ul>
 <li>Python</li>
@@ -151,7 +165,156 @@
 <li>Jax</li>
 <li>NumPyro</li>
 </ul>
-<h2 id="imports">Imports</h2>
+<h2 id="hmc-imports">HMC Imports</h2>
+<pre><code class="language-python">import jax
+import jax.numpy as jnp
+from jax import random, grad,jit
+import matplotlib.pyplot as plt
+from jax.scipy.stats import beta, bernoulli
+from functools import partial
+</code></pre>
+<h2 id="hmc-functions">HMC Functions</h2>
+<pre><code class="language-python">def log_posterior(
+    p: float,
+    alpha: float,
+    beta_param: float,
+    heads: int,
+    tails: int
+) -&gt; float:
+    &quot;&quot;&quot;Calculates the log-posterior for Bayesian coin flip model.
+
+    Args:
+        p: Probability of heads (between 0 and 1).
+        alpha: Alpha parameter of beta prior distribution.
+        beta_param: Beta parameter of beta prior distribution.
+        heads: Number of observed heads.
+        tails: Number of observed tails.
+
+    Returns:
+         The log-posterior value.
+    &quot;&quot;&quot;
+</code></pre>
+<pre><code class="language-python">def potential_fn(params: dict) -&gt; float:
+    &quot;&quot;&quot;Calculates the negative log-posterior (potential function).
+
+    Args:
+        params: A dictionary containing the 'p' parameter.
+
+    Returns:
+        The negative log-posterior value.
+    &quot;&quot;&quot;
+</code></pre>
+<pre><code class="language-python">def grad_potential_fn(params: dict) -&gt; float:
+    &quot;&quot;&quot;Calculates the gradient of the negative log-posterior.
+
+    Args:
+        params: A dictionary containing the 'p' parameter.
+
+    Returns:
+        The gradient of the negative log-posterior.
+    &quot;&quot;&quot;
+</code></pre>
+<pre><code class="language-python">def leapfrog(
+    grad_log_prob: callable,
+    position: float,
+    momentum: float, 
+    step_size: float, 
+    num_steps: int,
+    alpha: float,
+    beta_param: float,
+    heads: int,
+    tails: int
+) -&gt; tuple:
+    &quot;&quot;&quot;Implements the leapfrog integrator for Hamiltonian dynamics.
+
+    Args:
+        grad_log_prob:  A callable function to calculate the gradient of the log probability.
+        position: Current position (parameter value).
+        momentum: Current momentum.
+        step_size: Step size for the integrator.
+        num_steps: Number of leapfrog steps to take.
+        alpha: Alpha parameter of the beta prior.
+        beta_param: Beta parameter of the beta prior.
+        heads: Number of observed heads.
+        tails: Number of observed tails.
+
+    Returns:
+        A tuple containing the new position and new momentum.
+    &quot;&quot;&quot;
+</code></pre>
+<pre><code class="language-python">def hmc_step(
+    rng_key: jnp.ndarray,
+    position: float, 
+    step_size: float, 
+    num_leapfrog_steps: int,
+    alpha: float, 
+    beta_param: float, 
+    heads: int,
+    tails: int
+) -&gt; tuple:
+    &quot;&quot;&quot;Performs a single Hamiltonian Monte Carlo (HMC) step.
+
+    Args:
+        rng_key: JAX PRNGKey for random number generation.
+        position: Current position (parameter value).
+        step_size: Step size for the leapfrog integrator.
+        num_leapfrog_steps: Number of leapfrog steps to take.
+        alpha: Alpha parameter of the beta prior.
+        beta_param: Beta parameter of the beta prior.
+        heads: Number of observed heads.
+        tails: Number of observed tails.
+
+    Returns:
+        A tuple containing the new position and whether the step was accepted.
+    &quot;&quot;&quot;
+</code></pre>
+<pre><code class="language-python">def get_hmc_config() -&gt; dict:
+    &quot;&quot;&quot;Returns a dictionary containing the HMC configuration parameters.&quot;&quot;&quot;
+</code></pre>
+<h2 id="example-usage">Example Usage</h2>
+<pre><code class="language-python">
+def get_hmc_config() -&gt; dict:
+    &quot;&quot;&quot;Returns a dictionary containing the HMC configuration parameters.&quot;&quot;&quot;
+    return {
+        &quot;alpha&quot;: 1,              # Alpha parameter for beta prior
+        &quot;beta_prior&quot;: 1,         # Beta parameter for beta prior 
+        &quot;heads&quot;: 40,             # Number of observed heads
+        &quot;tails&quot;: 20,             # Number of observed tails
+        &quot;num_burnin&quot;: 500,       # Number of burn-in samples
+        &quot;num_samples&quot;: 5500,     # Total number of samples (including burn-in)
+        &quot;step_size&quot;: 0.05,       # HMC step size
+        &quot;num_leapfrog_steps&quot;: 30 # Number of leapfrog steps
+    }
+
+def main():
+    &quot;&quot;&quot;Executes the HMC sampling procedure.&quot;&quot;&quot;
+    config = get_hmc_config()
+
+    rng_key = random.PRNGKey(0)
+    samples = []
+    position = 0.5  # Initial position
+
+    for _ in range(config[&quot;num_samples&quot;]):
+        rng_key, subkey = random.split(rng_key)
+        position, _ = hmc_step(
+            subkey, 
+            position, 
+            config[&quot;step_size&quot;], 
+            config[&quot;num_leapfrog_steps&quot;], 
+            config[&quot;alpha&quot;],
+            config[&quot;beta_prior&quot;], 
+            config[&quot;heads&quot;], 
+            config[&quot;tails&quot;]
+        )
+        samples.append(position)
+
+    samples = samples[config[&quot;num_burnin&quot;]:]
+    print(f&quot;Estimated probability of heads: {jnp.mean(jnp.array(samples))}&quot;)
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<h2 id="random-process-imports">Random Process Imports</h2>
 <pre><code class="language-python">from scipy.stats import levy_stable
 from jax.scipy.linalg import cholesky
 from typing import Dict, List, Tuple
@@ -273,7 +436,7 @@ from numpyro.infer import MCMC, NUTS
     each industry's plot to a separate file in the 'plots' directory, named 'simulated_stock_price_by_[industry].png'.
     &quot;&quot;&quot;
 </code></pre>
-<h2 id="example-usage">Example Usage</h2>
+<h2 id="example-usage_1">Example Usage</h2>
 <pre><code class="language-python">def main() -&gt; None:
     &quot;&quot;&quot;
     Main function to initialize the simulator, run the stock price simulation, and plot the results.
