@@ -206,8 +206,8 @@ def leapfrog(theta, r, eps, n_steps):
     An array of sampled probability parameter values in the original parameter space (0, 1).
     &quot;&quot;&quot;
 </code></pre>
-<pre><code class="language-python">num_heads = 700
-num_tails = 300
+<pre><code class="language-python">num_heads = 800
+num_tails = 200
 # Create an array with 60 heads (1) and 40 tails (0)
 y = jnp.concatenate([jnp.ones(num_heads), jnp.zeros(num_tails)])
 alpha = 2.0
@@ -220,7 +220,7 @@ def main():
     theta0 = logit(jnp.array(0.5))  # Initial parameter in log-odds space
     eps = 0.01  # Step size
     L = 10  # Number of leapfrog steps
-    num_steps = 6  # Number of RMHMC iterations
+    num_steps = 25  # Number of RMHMC iterations
 
     samples = rmhmc(rng_key, theta0, eps, L, num_steps)
     end = time.time()
