@@ -6,9 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <meta name="author" content="Jacob Rider">
-        <link rel="canonical" href="https://Grow-Myelin.github.io/skills/">
+        <link rel="canonical" href="https://Grow-Myelin.github.io/rmhmc/">
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Skills - Jacob Rider's Portfolio</title>
+        <title>Riemannian Manifold Hamiltonian Monte Carlo (RMHMC) - Jacob Rider's Portfolio</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
@@ -39,15 +39,15 @@
                             <li class="navitem">
                                 <a href="../education/" class="nav-link">Education</a>
                             </li>
-                            <li class="navitem active">
-                                <a href="./" class="nav-link">Skills</a>
+                            <li class="navitem">
+                                <a href="../skills/" class="nav-link">Skills</a>
                             </li>
-                            <li class="dropdown">
+                            <li class="dropdown active">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="../rmhmc/" class="dropdown-item">Riemannian Manifold Hamiltonian Monte Carlo (RMHMC)</a>
+    <a href="./" class="dropdown-item active">Riemannian Manifold Hamiltonian Monte Carlo (RMHMC)</a>
 </li>
                                     
 <li>
@@ -80,12 +80,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../education/" class="nav-link">
+                                <a rel="prev" href="../skills/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../rmhmc/" class="nav-link">
+                                <a rel="next" href="../ti4_combat_simulator/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -107,13 +107,24 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="2"><a href="#skills" class="nav-link">Skills</a>
+            <li class="nav-item" data-level="1"><a href="#riemannian-manifold-hamiltonian-monte-carlo-rmhmc" class="nav-link">Riemannian Manifold Hamiltonian Monte Carlo (RMHMC)</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#project-overview" class="nav-link">Project Overview</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            
-            <li class="nav-item" data-level="2"><a href="#passions" class="nav-link">Passions</a>
+            <li class="nav-item" data-level="2"><a href="#technologies-used" class="nav-link">Technologies Used</a>
               <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#rmhmc-imports" class="nav-link">RMHMC Imports</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#rmhmc-functions" class="nav-link">RMHMC Functions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -121,45 +132,106 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h2 id="skills">Skills</h2>
-<hr />
+<h1 id="riemannian-manifold-hamiltonian-monte-carlo-rmhmc">Riemannian Manifold Hamiltonian Monte Carlo (RMHMC)</h1>
+<p><strong><a href="https://github.com/Grow-Myelin/ProbProg/tree/main/RMHMC">View Project on GitHub</a></strong></p>
+<h2 id="project-overview">Project Overview</h2>
+<p>This project implements a basic framework for Riemannian Manifold Hamiltonian Monte Carlo (RMHMC) and demonstrates its application to a simple Bayesian inference task: estimating the probability parameter of a potentially loaded coin.  The code highlights the power of utilizing JAX for numerical efficiency and automatic differentiation.</p>
+<h2 id="technologies-used">Technologies Used</h2>
 <ul>
-<li><strong>Python</strong>: Proficient in Python programming for end-to-end data processing and modeling<ul>
-<li><strong>Pandas</strong></li>
-<li><strong>NumPy</strong></li>
-<li><strong>Matplotlib</strong></li>
-<li><strong>Jax</strong></li>
-<li><strong>NumPyro</strong></li>
+<li>Python</li>
+<li>Jax</li>
 </ul>
-</li>
-</ul>
+<h2 id="rmhmc-imports">RMHMC Imports</h2>
+<pre><code class="language-python">import jax
+from typing import Tuple, Callable
+import jax.numpy as jnp
+from jax import grad, jit,random,lax
+from jax.scipy.special import logit, expit
+import time
+import os
+</code></pre>
+<h2 id="rmhmc-functions">RMHMC Functions</h2>
+<pre><code class="language-python">@jit
+def U(theta):
+    &quot;&quot;&quot;
+    Calculate the negative log-posterior for a coin flip problem.
+
+    Args:
+    theta: A JAX array representing the log-odds of the probability parameter.
+
+    Returns:
+    The negative log-posterior as a scalar.
+    &quot;&quot;&quot;
+</code></pre>
+<pre><code class="language-python">@jit
+def G(theta):
+    &quot;&quot;&quot;
+    Compute the Riemannian metric tensor using the Hessian of U(theta).
+
+    Args:
+    theta: A JAX array representing the log-odds of the probability parameter.
+
+    Returns:
+    The Riemannian metric tensor as a JAX array.
+    &quot;&quot;&quot;
+</code></pre>
+<pre><code class="language-python">@jit
+def leapfrog(theta, r, eps, n_steps):
+    &quot;&quot;&quot;
+    Perform leapfrog steps for RMHMC, adjusted for JIT compilation.
+
+    Args:
+    theta: Initial theta value.
+    r: Initial momentum.
+    eps: Step size for the leapfrog integration.
+    n_steps: Number of leapfrog steps to perform.
+
+    Returns:
+    The final state (theta, r) after leapfrog steps.
+    &quot;&quot;&quot;
+</code></pre>
+<pre><code class="language-python">def rmhmc(rng_key, theta0, eps, L, num_steps):
+    &quot;&quot;&quot;
+    RMHMC loop for estimating the probability parameter of a loaded coin.
+
+    Args:
+    rng_key: Random key for JAX's random number generation.
+    theta0: Initial log-odds value for the probability parameter.
+    eps: Step size for the leapfrog integration.
+    L: Number of leapfrog steps per iteration.
+    num_steps: Total number of RMHMC iterations to perform.
+
+    Returns:
+    An array of sampled probability parameter values in the original parameter space (0, 1).
+    &quot;&quot;&quot;
+</code></pre>
+<pre><code class="language-python">num_heads = 300
+num_tails = 700
+# Create an array with 60 heads (1) and 40 tails (0)
+y = jnp.concatenate([jnp.ones(num_heads), jnp.zeros(num_tails)])
+alpha = 2.0
+beta_param = 2.0
+
+def main():
+    start = time.time()
+    seed = int.from_bytes(os.urandom(4), 'big')
+    rng_key = random.PRNGKey(seed)
+    theta0 = logit(jnp.array(0.5))  # Initial parameter in log-odds space
+    eps = 0.01  # Step size
+    L = 10  # Number of leapfrog steps
+    num_steps = 5000  # Number of RMHMC iterations
+
+    samples = rmhmc(rng_key, theta0, eps, L, num_steps)
+    end = time.time()
+    print(end-start)
+    print(f&quot;Mean estimate of p: {jnp.mean(jnp.array(samples))}&quot;)
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<p><a href="../experience/">Experience</a> | <a href="../education/">Education</a> | <a href="../skills/">Skills</a> | <a href="../projects/"><strong>Projects</strong></a></p>
 <hr />
-<ul>
-<li><strong>R</strong>: Experienced in R programming for data cleaning, analysis, and visualization<ul>
-<li><strong>data.table</strong></li>
-<li><strong>ggplot2</strong></li>
-<li><strong>quantmod</strong></li>
-<li><strong>rstan</strong></li>
-</ul>
-</li>
-</ul>
-<hr />
-<ul>
-<li><strong>SQL</strong>: Experienced in SQL database management, querying, and data manipulation</li>
-<li><strong>AWS</strong>: Familiarity with AWS services such as Lambda, S3, and Athena</li>
-<li><strong>Tableau</strong>: Skilled in using Tableau to inform decision makers with insightful dashboards that are visually appealing</li>
-<li><strong>Power BI</strong>: Similarly proficient in creating informative dashboards in Power BI</li>
-<li><strong>Excel</strong>: Advanced proficiency in Excel including VLookups, pivot tables, and basic logical functions</li>
-</ul>
-<hr />
-<h2 id="passions">Passions</h2>
-<ul>
-<li><strong>Data Modeling</strong>: Enthusiastic about constructing accurate analytical frameworks to uncover insights and inform strategic decision-making</li>
-<li><strong>Probabilistic Programming</strong>: Fascinated by the use of Markov Chain Monte Carlo (MCMC) methods to explain randomness in data</li>
-<li><strong>Generative AI</strong>: Interested in exploring the capabilities of Large Language Models (LLMs) for building architecture and solving unique problems</li>
-</ul>
-<hr />
-<p><a href="../experience/">Experience</a> | <a href="../education/">Education</a> | <a href="./"><strong>Skills</strong></a> | <a href="../projects/">Projects</a></p></div>
+<p><a href="./"><strong>RMHMC</strong></a> | <a href="../ti4_combat_simulator/">TI4 Combat Simulator</a> | <a href="../baseball_pitch_predictor/">Baseball Pitch Predictor</a> | <a href="../prob_prog_tools/">Probabalistic Programming Tools</a> | <a href="../prob_prog_ex/">Probabalistic Programming Examples</a> | <a href="../data_tools/">Data Tools</a></p></div>
             </div>
         </div>
 
