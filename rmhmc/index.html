@@ -149,6 +149,7 @@ from jax import grad, jit,random,lax
 from jax.scipy.special import logit, expit
 import time
 import os
+import matplotlib.pyplot as plt
 </code></pre>
 <h2 id="rmhmc-functions">RMHMC Functions</h2>
 <pre><code class="language-python">@jit
@@ -205,8 +206,8 @@ def leapfrog(theta, r, eps, n_steps):
     An array of sampled probability parameter values in the original parameter space (0, 1).
     &quot;&quot;&quot;
 </code></pre>
-<pre><code class="language-python">num_heads = 300
-num_tails = 700
+<pre><code class="language-python">num_heads = 700
+num_tails = 300
 # Create an array with 60 heads (1) and 40 tails (0)
 y = jnp.concatenate([jnp.ones(num_heads), jnp.zeros(num_tails)])
 alpha = 2.0
@@ -219,12 +220,22 @@ def main():
     theta0 = logit(jnp.array(0.5))  # Initial parameter in log-odds space
     eps = 0.01  # Step size
     L = 10  # Number of leapfrog steps
-    num_steps = 5000  # Number of RMHMC iterations
+    num_steps = 6  # Number of RMHMC iterations
 
     samples = rmhmc(rng_key, theta0, eps, L, num_steps)
     end = time.time()
-    print(end-start)
+    print(f&quot;Execution time: {end - start} seconds&quot;)
     print(f&quot;Mean estimate of p: {jnp.mean(jnp.array(samples))}&quot;)
+
+    # Plot the convergence of samples
+    plt.figure(figsize=(10, 6))
+    plt.plot(samples, marker='o', linestyle='-', markersize=2, linewidth=0.5, alpha=0.6)
+    plt.title('Convergence of Samples')
+    plt.xlabel('Iteration')
+    plt.ylabel('Sampled Probability Parameter')
+    plt.grid(True)
+    plt.savefig('RMHMC_convergence.pdf')
+
 
 if __name__ == &quot;__main__&quot;:
     main()
